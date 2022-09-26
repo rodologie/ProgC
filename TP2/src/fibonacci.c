@@ -23,5 +23,5 @@ int main() {
         printf("les n termes de la suite de Fibonacci sont : %i \n ", U_next);
     }
 
-    
+return 0;
 }
