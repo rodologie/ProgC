@@ -10,4 +10,5 @@ int main() {
     }
 
     printf("La valeur de a, à la puissance b est : %d \n", res);
+    return 0;
 }
