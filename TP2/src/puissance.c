@@ -2,11 +2,12 @@
 
 int main() {
     int a = 2 ;
-    int b = 3 ;
+    int b;
+    int res = 1;
 
-    for(b, b-1>0,b--) {
-        a= a*a;
+    for(b = 3;(b-1)>=0;b--) {
+        res = res*a;
     }
 
-    disp("La valeur de a est : %i \n",a)
+    printf("La valeur de a, à la puissance b est : %d \n", res);
 }
