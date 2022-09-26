@@ -4,11 +4,11 @@ int main()
 {
 
     // Pour la création de chaque liste, on utilise la fonction Char ( chaine de caractère )
-    char nom[][3] = {"A1", "A2", "A3", "A4", "A5"};                               // création liste des noms
-    char prenom[][15] = {"E1", "E2", "E3", "E4", "E5"};         // création liste des prénoms
-    char adresse[][15] = {"44 rue Grignnard", "45 rue Grignnard", "46 rue Grignnard", "47 rue Grignnard", "48 rue Grignnard"}; // création liste des adresses
-    char notes_progc[][3] = {"20", "14", "16", "2", "18"};                        // création liste des notes 1
-    char notes_syst[][3] = {"20", "6", "17", "8", "12"};                          // création liste des notes 2
+    char nom[][30] = {"A1", "A2", "A3", "A4", "A5"};                                                                            // création liste des noms
+    char prenom[][30] = {"E1", "E2", "E3", "E4", "E5"};                                                                        // création liste des prénoms
+    char adresse[][30] = {"44 rue Grignnard", "45 rue Grignnard", "46 rue Grignnard", "47 rue Grignnard", "48 rue Grignnard"}; // création liste des adresses
+    char notes_progc[][30] = {"13", "14", "15", "16", "17"};                                                                     // création liste des notes 1
+    char notes_syst[][30] = {"18", "19", "20", "10", "11"};                                                                       // création liste des notes 2
     int i;
     // Affichage de chaque donnés par étudiant, utilisation d'une boucle for, les i correspondent à 1 étudiant
     // De 0 à 4
