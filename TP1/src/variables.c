@@ -27,8 +27,8 @@ int main() {
     unsigned long ulong_var = 263598UL;
     printf("unsigned long : %lu \n", ulong_var) ;
 
-    long long int f= 1859345LL; 
-    printf("long long int : %lld \n", f);
+    long long int k= 1859345LL; 
+    printf("long long int : %lld \n", k);
 
     unsigned long long int ullong_var= 4789561ULL;  /* Pour les longs éléments, il faut ajouter le code de conversion à la fin de la valeur */
     printf("unsigned long long int : %llu \n", ullong_var);
