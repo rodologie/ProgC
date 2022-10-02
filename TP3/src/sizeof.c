@@ -11,6 +11,8 @@ int main() {
     printf("sizeof (float *) : %lu  octets \n",sizeof (float *) );
     printf("sizeof (float **) : %lu  octets \n",sizeof (float **) );
     printf("sizeof (float ***) : %lu octets \n",sizeof (float ***) );
+
+    return 0;
 }
 
 
