@@ -39,7 +39,7 @@ int main()
 
     // -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 
-    unsigned char d = 236; /* unisgned char => valeur de 0 a 255 */
+    unsigned char d = 236; /* unsigned char => valeur de 0 a 255 */
     char *ptr4 = (char *)&d;
 
     for (k = 3; k >= 0; k--)
