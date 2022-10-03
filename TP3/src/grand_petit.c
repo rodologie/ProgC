@@ -18,7 +18,7 @@ int main() {
 
     int j=0;
     for (k = 0; k < sizeof(tableau) / sizeof(int); k++){
-        tableau[k] = rand() / 1000;                           /* Parcourt de tous les indices du tableau */
+        tableau[k] = rand() % 1000;                           /* Parcourt de tous les indices du tableau */
         printf("tableau de 100 entiers : %i \n", tableau[k]); /* Attribution aleatoire des entiers du tableau */
     }
 
