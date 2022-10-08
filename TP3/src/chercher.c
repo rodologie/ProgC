@@ -5,6 +5,7 @@ puis en cherchant un entier dans ce tableau. Si l'entier est présent
 dans le tableau, affichez le message 'entier présent'. */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main() {
     int rand(void);
@@ -43,13 +44,59 @@ int main() {
     {
         printf("Entier non présent \n");
     }
-    
-    
+
+    printf(" \n \n \n");
 
     // -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ Exercice 8 -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+    printf("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ Exercice 8 -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_- \n \n \n \n");
 
+    // Partie génération des phrases
 
+    char tableau_phrase[10][100]={};
+    char tableau_mot [15][8] = {"je", "la","le", "suis","est", "voiture", "train", "bateau", "noir", "bleu", "rouge", "vert", "rose", "grand", "petit"};
+    // char entree2[50];
+    int incr = 0;
 
+    for (int i = 0; i<=10; i++){
+        int nb_mot  =rand() % 4 + 1;
+
+        for (int var = 0; var <= nb_mot; var ++ ){
+            int indice_mot = rand() % 15;
+            strcat(tableau_phrase[i],tableau_mot[indice_mot]);
+        }
+    }
+
+    for (int n = 0; n<=10; n ++){
+        printf("%s \n", tableau_phrase[n]);
+    }
+
+    // partie recherche de la phrase
+
+    char entree2[50];
+    printf("Entrez la que vous recherchez : ");
+    scanf("%s", entree2); /* Demande la valeur à l'utilisateur /!\ a l'espace entre le s et les guillemets */
+    while (entree2[incr]  != '\0'){
+            incr = incr + 1;
+        }
+    
+
+    for (int p=0; p<10; p++){
+        int erreur = 0;
+        for (int x = 0; x < incr + 1; x++){
+            if (tableau_phrase[p][x]!= entree2[x]){
+                erreur = erreur + 1;
+            }
+        }
+        if (erreur != 0)
+        {
+            printf("La pharse n'est pas présente à l'indice %i \n", p);
+        }
+        else{
+            printf("La prhase est présente à l'indice %i \n", p);
+        }
+    }
+
+    
 
     return 0;
     
