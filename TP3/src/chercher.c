@@ -1,3 +1,5 @@
+// -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ Exercice 4 -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
 /* Écrivez un programme *chercher.c* en créant un tableau de 100 entiers et
 puis en cherchant un entier dans ce tableau. Si l'entier est présent
 dans le tableau, affichez le message 'entier présent'. */
@@ -28,6 +30,12 @@ int main() {
         }
     }
     }
-return 0;
+
+    // -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ Exercice 8 -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+    
+
+
+    return 0;
     
 }
