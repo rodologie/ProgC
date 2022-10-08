@@ -37,9 +37,9 @@ int main()
 
     char input1[30];
     int indice = 49;
-    printf("saisissez la valeur recherchée: ");
-    fgets (input1, sizeof(input1),stdin);
-    int val_rech = atoi(input1);
+    // printf("saisissez la valeur recherchée: ");
+    // fgets (input1, sizeof(input1),stdin);
+    int val_rech = 80; //atoi(input1);
     int err = 0;
     int borne_max = 100;
     int borne_min = 0;
@@ -48,7 +48,7 @@ int main()
         if (val_rech > tableau_init[indice]){
              borne_min = indice;
              indice = (borne_max+borne_min)/2;
-             if ((val_rech != tableau_init[indice])&&(val_rech != tableau_init[indice - 1])&& (borne_min == indice)){
+             if ((val_rech != tableau_init[indice])&&(val_rech < tableau_init[indice + 1])&& (borne_min == indice)){
                 err  =1;
                 break;
              }

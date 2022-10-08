@@ -27,96 +27,65 @@ Vous pouvez créer une nouvelle structure pour stocker les couleurs distinctes e
 #include <stdio.h>
 #include <stdlib.h>
 
-struct couleurs { /* Les couleurs sont données entre 0 et 255 et A entre 0 et 1 */
-    int R ;
-    int G ;
-    int B ;
-    int A ;
-    
+struct Couleurs
+{ // création de la structure couleur
+    char r;
+    char v;
+    char b;
+    char a;
 };
 
-struct distinction {
-    int R ;
-    int G ;
-    int B ;
-    int A ;
-};
+int main()
+{
+    struct Couleurs tableau[100]; // création du tanleau de 100 couleurs
 
-int comparateur(struct couleurs ligne_ref,struct couleurs ligne_couleur ) { /* Fonction qui compare 2 lignes du tableau couleur par couleur */
-    int cpt=0;
-    if(ligne_ref.R != ligne_couleur.R){
-        if(ligne_ref.G != ligne_couleur.G){
-            if(ligne_ref.B != ligne_couleur.B) {
-                if(ligne_ref.A != ligne_couleur.A) {
-                    cpt = cpt+1;
-                }
+    for (int i = 0; i < 98; i++)
+    { // affectation des valeurs aux 100 couelurs du tableau, possibilité de vérifier si le compteur marche en changeant la borne max de la boucle par 98
+      //  (on en créerait alors 98 et on compléterait le tableau par les lignes commentées qu'il faudrait décommenter)
+
+        int rouge = rand(); // on assigne des valeurs aléatoires pour chaque couleur
+        int vert = rand();
+        int bleu = rand();
+        int alpha = rand();
+
+        tableau[i].r = rouge;
+        tableau[i].v = vert;
+        tableau[i].b = bleu;
+        tableau[i].a = alpha;
+    }
+
+    tableau[98].r = 0x00;
+    tableau[98].v = 0x00;
+    tableau[98].b = 0x00;
+    tableau[98].a = 0x00;
+
+    tableau[99].r = 0x00;
+    tableau[99].v = 0x00;
+    tableau[99].b = 0x00;
+    tableau[99].a = 0x00;
+
+    int compt = 1; // compteur du nombre de chaque couleur
+
+    for (int i = 0; i < 100; i++)
+    { // on parcourt la liste des couleurs
+        for (int j = i + 1; j < 100; j++)
+        { // on reparcourt la liste pour chaque couleur du tableau
+            if ((tableau[i].r == tableau[j].r) && (tableau[i].v == tableau[j].v) && (tableau[i].b == tableau[j].b) && (tableau[i].a == tableau[j].a))
+            {                      // si deux couleurs dans le tableau sont similaires
+                tableau[j].r = -1; // on remplace dans le tableau une des couleurs pour ne plus la prendre en compte ensuite
+                tableau[j].v = -1;
+                tableau[j].b = -1;
+                tableau[j].a = -1;
+                compt++; // on incrémente le compteur des occurences
             }
         }
-    }
-    return cpt;
-};
 
-void affichstruct(struct distinction Tab_distinct){ /* Affichage de la valeur de chaque couleur une par une */
-    printf(" La valeur de R est %x\n",Tab_distinct.R);
-    printf(" La valeur de G est %x\n", Tab_distinct.G);
-    printf(" La valeur de B est %x\n", Tab_distinct.B);
-    printf(" La valeur de A est %x\n", Tab_distinct.A);
-};
-
-int main() {
-    struct couleurs Tab[10]; /* Creation d'un tableau de 100 lignes avec les couleurs R,G,B,A */
-    int var;
-
-    for(var=0; var<100 ; var++) { /* Declaration des valeurs aléatoires des couleurs */
-        Tab[var].R = rand() %256;
-        Tab[var].G = rand() %256;
-        Tab[var].B = rand() %256;
-        Tab[var].A = (float)(rand() %256)/256;
-    }
-   
-    int comparateur=0;
-    struct distinction Tab_distinct[comparateur];
-
-    for (var = 0; var < 100; var++){ /* Test de chaque couleur du tableau Tab */
-        struct couleurs ligne_ref = Tab[var];
-        
-        for(int j=var; j<100; j++) { /* Avec toutes les autres couleurs de Tab à partir de la couleur essayee */
-            struct couleurs ligne_couleur= Tab[j];
-            int cpt;
-            cpt  = comparateur(ligne_ref,ligne_couleur);
-            if(cpt == 1) {
-                comparateur = comparateur +1; /* Incrementation du nombre de couleur distinctes */
-                Tab_distinct[comparateur] = ligne_ref;
-                
-            }
+        if ((tableau[i].r != -1) && (tableau[i].v != -1) && (tableau[i].b != -1) && (tableau[i].a != -1))
+        {                                                                                                                                                           // On vérifie si la oculeur n'a pas déjà été vue
+            printf("R = %02x \nG = %02x \nB = %02x \nAlpha = %02x, \nnombre de couleurs: %d \n \n", tableau[i].r, tableau[i].v, tableau[i].b, tableau[i].a, compt); // on affiche la couleur en question avec son nombre d'occurence dans le tableau
         }
+        compt = 1; // on réinitialise le compteur à 1 puis on repart
     }
 
-    for (int k =0; k<comparateur;k++){ /* Affichage des couleurs distinctes */
-        printf("Tab[%d]\n", k);
-        affichstruct(Tab_distinct[k]);
-    }
-    printf("Il y a %i couleurs distinctes dans le tableau \n", comparateur); /* Affichage du nombre de couleurs distinctes */
-
-return 0;
+    return (0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
