@@ -18,8 +18,10 @@ int main() {
             *ptr1 = *ptr1 * 3;  /* Multiplication par 3 du pointeur */
             printf("Tab 1 :Le %i eme indice est divisible par 2, sa valeur est : %i \n",k, *ptr1);
         }
-       
     }
+    
+    printf("\n \n \n");
+
     int j;
     for(j=0; j<sizeof(tableau2)/sizeof(int);j++) { /* Fonctionnement identique au tableau 1 */
         ptr2=&(tableau2[j]) ;
