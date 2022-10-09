@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main() {
-
+/* Renvoie la taille en octet des pointeurs */
     printf("sizeof(int) : %lu  octets \n",sizeof (int) );
     printf("sizeof (int *) : %lu octets \n",sizeof (int *) );
     printf("sizeof (int **) : %lu octets \n",sizeof (int **) );
