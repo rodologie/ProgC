@@ -8,7 +8,7 @@ int main() {
 
     printf("le nombre %d en base 10, vaut ", max_bin);
 
-    for (i=0; i<15; i++){   //on divise par deux jusqu'à n'avoir aucun reste
+    for (i=0; i<15; i++){   //on divise par deux (car on veut du binaire) jusqu'à n'avoir aucun reste
         nombre[i]=max_bin%2;
         max_bin = max_bin/2;
     }
@@ -17,4 +17,6 @@ int main() {
         printf("%d", nombre[k]);
     }
     printf(" en base 2.\n");
+
+    return 0;
 }

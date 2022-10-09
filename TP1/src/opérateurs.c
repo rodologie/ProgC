@@ -14,4 +14,7 @@ int main() {
     int ET = a && b;
     int OU = a||b;
     printf("Les résulatats des tests logiques sont:\n - Négation: %d,\n - ET: %d\n - OU: %d\n", negation, ET, OU);
+    return 0;
 }
+
+/*Pas de commentaires particulier à faire, le code et la nommenclature des variables sont clairs*/

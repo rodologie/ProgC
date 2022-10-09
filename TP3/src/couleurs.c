@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+//code du TP2
+
 struct couleurs{
     int R;
     int G;
@@ -24,4 +26,5 @@ int main()
         printf("Tab[%d]\n", var);
         affichstruct(Tab[var]);
     }
+    return 0;
 }

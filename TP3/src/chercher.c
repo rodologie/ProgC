@@ -52,10 +52,10 @@ int main() {
 
     // Partie génération des phrases
 
-    char tableau_phrase[10][100]={};
-    char tableau_mot [15][8] = {"je", "la","le", "suis","est", "voiture", "train", "bateau", "noir", "bleu", "rouge", "vert", "rose", "grand", "petit"};
+    char tableau_phrase[10][100]={}; // tab leau contenant les phrases, initilament vide
+    char tableau_mot [15][8] = {"je", "la","le", "suis","est", "voiture", "train", "bateau", "noir", "bleu", "rouge", "vert", "rose", "grand", "petit"}; // tableau contenant les mots 
     // char entree2[50];
-    int incr = 0;
+    int incr = 0; 
 
     for (int i = 0; i<=10; i++){
         int nb_mot  =rand() % 4 + 1;
@@ -72,7 +72,7 @@ int main() {
 
     // partie recherche de la phrase
 
-    char entree2[50];
+    char entree2[50]; //variable contenant la phrase entrée par l'utilisateur (max 50 caractères)
     printf("Entrez la que vous recherchez : ");
     scanf("%s", entree2); /* Demande la valeur à l'utilisateur /!\ a l'espace entre le s et les guillemets */
     while (entree2[incr]  != '\0'){
@@ -80,18 +80,18 @@ int main() {
         }
     
 
-    for (int p=0; p<10; p++){
+    for (int p=0; p<10; p++){   //on parcourt le tableau de phrase
         int erreur = 0;
-        for (int x = 0; x < incr + 1; x++){
-            if (tableau_phrase[p][x]!= entree2[x]){
+        for (int x = 0; x < incr + 1; x++){ //on parcourt les caractères de la phrase
+            if (tableau_phrase[p][x]!= entree2[x]){ //si les caractères sont différents, on incrémente l'erreur
                 erreur = erreur + 1;
             }
         }
-        if (erreur != 0)
+        if (erreur != 0) //si la variable erreur est différente de 0 indique que la phrase n'est pas présente dans le tableau
         {
             printf("La pharse n'est pas présente à l'indice %i \n", p);
         }
-        else{
+        else{ // si l'erreur est nulle, alors on indique que la phrase est dans le tableau à l'indice ....
             printf("La prhase est présente à l'indice %i \n", p);
         }
     }

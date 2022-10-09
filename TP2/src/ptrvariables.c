@@ -8,13 +8,17 @@ int main()
     int k;
 
     int a = 999;
-    char *ptr1 = (char *)&a;
+    char *ptr1 = (char *)&a;    //on définit un pointeur d'adresse
 
     for (k=3; k>=0; k--){
-        unsigned char ptr12 = *(ptr1 + k);
-        printf("%02x ", ptr12);
+        unsigned char ptr12 = *(ptr1 + k); //on définit un pointeur qui pointe les valeurs de l'adresse
+        printf("%02x ", ptr12); // on affiche
     }
     printf("\n");
+
+    // /!\ Le code est le même pour chaque type de variable, donc il n'est comenté qu'une seule fois
+
+    // -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 
     char b = 'b';
     char *ptr2 = (char *)&b;

@@ -37,17 +37,17 @@ int main()
 
     char input1[30];
     int indice = 49;
-    // printf("saisissez la valeur recherchée: ");
-    // fgets (input1, sizeof(input1),stdin);
-    int val_rech = 80; //atoi(input1);
+    printf("saisissez la valeur recherchée: ");
+    fgets (input1, sizeof(input1),stdin);
+    int val_rech =  atoi(input1);
     int err = 0;
     int borne_max = 100;
     int borne_min = 0;
 
-    while (val_rech != tableau_init[indice]){
-        if (val_rech > tableau_init[indice]){
-             borne_min = indice;
-             indice = (borne_max+borne_min)/2;
+    while (val_rech != tableau_init[indice]){ //boucle tant que la valeur recherchée est différente de celle pointée dans le tableau
+        if (val_rech > tableau_init[indice]){ //si valeur recherchée est plus grande que celle pointée
+             borne_min = indice;    //la borne min devient l'indice de la valeur pointée
+             indice = (borne_max+borne_min)/2;  //l'indice devient la valuer moyenne 
              if ((val_rech != tableau_init[indice])&&(val_rech < tableau_init[indice + 1])&& (borne_min == indice)){
                 err  =1;
                 break;

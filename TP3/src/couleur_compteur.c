@@ -39,7 +39,7 @@ int main()
 {
     struct Couleurs tableau[100]; // création du tanleau de 100 couleurs
 
-    for (int i = 0; i < 98; i++)
+    for (int i = 0; i < 100; i++)
     { // affectation des valeurs aux 100 couelurs du tableau, possibilité de vérifier si le compteur marche en changeant la borne max de la boucle par 98
       //  (on en créerait alors 98 et on compléterait le tableau par les lignes commentées qu'il faudrait décommenter)
 
@@ -54,15 +54,15 @@ int main()
         tableau[i].a = alpha;
     }
 
-    tableau[98].r = 0x00;
-    tableau[98].v = 0x00;
-    tableau[98].b = 0x00;
-    tableau[98].a = 0x00;
+    // tableau[98].r = 0x00;
+    // tableau[98].v = 0x00;
+    // tableau[98].b = 0x00;
+    // tableau[98].a = 0x00;
 
-    tableau[99].r = 0x00;
-    tableau[99].v = 0x00;
-    tableau[99].b = 0x00;
-    tableau[99].a = 0x00;
+    // tableau[99].r = 0x00;
+    // tableau[99].v = 0x00;
+    // tableau[99].b = 0x00;
+    // tableau[99].a = 0x00;
 
     int compt = 1; // compteur du nombre de chaque couleur
 

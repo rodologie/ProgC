@@ -25,5 +25,7 @@ int main() {
     printf("Nombre de caractere de la chaine : %i \n",i);
     printf("mot copie : %s \n",mot_copie);
     printf("mot concatene: %s \n",mot_concatene);
+
+    return 0;
     
 }
