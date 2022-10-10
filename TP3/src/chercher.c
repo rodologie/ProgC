@@ -7,8 +7,6 @@ dans le tableau, affichez le message 'entier présent'. */
 #include <stdlib.h>
 #include <string.h>
 
-printf("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ Exercice 4 -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_- \n \n \n \n");
-
 int main() {
     int rand(void);
     int k;
@@ -77,6 +75,7 @@ int main() {
     char entree2[50]; //variable contenant la phrase entrée par l'utilisateur (max 50 caractères)
     printf("Entrez la que vous recherchez : ");
     scanf("%s", entree2); /* Demande la phrase à chercher à l'utilisateur  */
+    int nb_lettre = 0;
     while (entree2[nb_lettre]  != '\0'){
             nb_lettre = nb_lettre + 1;
         }
