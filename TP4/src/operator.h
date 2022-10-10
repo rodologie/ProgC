@@ -1,31 +1,15 @@
-int addition(int num1, int num2) {
-    return num1 + num2;
-}
+int addition(int,int);
 
-int soustraction(int num1, int num2){
-    return  num1 - num2;
-}
+int soustraction(int , int );
 
-int produit(int num1, int num2){
-    return num1*num2;
-}
+int produit(int , int ); 
 
-int quotient(int num1, int num2){
-    return num1/num2;
-}
+int quotient(int , int );
 
-int modulo(int num1, int num2){
-    return num1%num2;
-}
+int modulo(int , int );    
 
-int ET(int num1, int num2){
-    return num1&&num2;
-}
+int ET(int , int );    
 
-int OU(int num1, int num2){
-    return num1 || num2;
-}
-
-int negation(int num1, int num2){
-    return ~num1;
-}
+int OU(int , int );
+    
+int negation(int , int );
