@@ -3,6 +3,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-char lire_fichier(char *fichier.docx) 
+// Declaration des fonctions
+char lire_fichier(char *nom_fichier); 
 
-void ecrire_dans_fichier(char *fichier.c,  char *message ) 
+char ecrire_dans_fichier(char *nom_fichier,  char *message );
