@@ -57,6 +57,6 @@ int main() {
         informations = strcat(np_rv,liste_eleve[k].notes );
     }
     
-    
+    close(fd);
     return 0;
 }

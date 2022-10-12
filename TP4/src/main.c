@@ -38,11 +38,14 @@ int main(){
 
     if( action_utilisateur == 'e') { // Si l'utilisateur ecrit e, nous appelons la fonction ecriture
                                     //'e' permet de comparer un caractere a un autre
-
+        
         char message_utilisateur[100]; // Definition de la taille max d'un message
+
         printf("Entrez la phrase que vous souhaitez ajouter : ");
-        scanf("%s", message_utilisateur); // message_utilisateur etant deja un pointeur, nous n'avons pas besoin du &
+        scanf("%[\n]s", message_utilisateur); // message_utilisateur etant deja un pointeur, nous n'avons pas besoin du &. "%[\n]s" permet de recuperer la chaine de caractere jusqu'au saut de ligne.
+
         ecrire_dans_fichier("./fichierModif.txt", message_utilisateur ); // Nous voulons ecrire une chaine de caractere dons nous ne mettons pas * devant message_utilisateur
+        printf("message utilisateur : %s \n", message_utilisateur); /* XXXXX rien ne s'affiche ... pourquoi ???????
     }
 
     else if( action_utilisateur == 'l') { // Idem mais en lecture => else if c'est pour etre sur que si l'on rentre dans une des conditions, nous ne rentrons pas dans les autres
