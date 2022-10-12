@@ -14,12 +14,13 @@ char lire_fichier(char *nom_fichier) {
     // Fonction renvoyant les caracteres presents dans le fichier 
     char content[2000]; // Definition  du contenu du fichier de 2000 caracteres max
     int fd, count, size; // declaration des entiers utiles
-    fd = open (nom_fichier, O_RDONLY); // ouverture du fichier : fichier.docx
+    fd = open (nom_fichier, O_RDONLY); // ouverture du fichier : fichier.txt
     size = read(fd, content, strlen(content)); 
     for (count = 0; count < size; count ++) {
         printf("%c", content[count]); 
     }
     close(fd);
+    printf("\n");
     return 0; 
 }; 
   
