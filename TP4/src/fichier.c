@@ -15,7 +15,8 @@ char lire_fichier(char *nom_fichier) {
     char content[2000]; // Definition  du contenu du fichier de 2000 caracteres max
     int fd, count, size; // declaration des entiers utiles
     fd = open (nom_fichier, O_RDONLY); // ouverture du fichier : fichier.txt
-    size = read(fd, content, strlen(content)); 
+    size = read(fd, content, sizeof(content)); 
+   
     for (count = 0; count < size; count ++) {
         printf("%c", content[count]); 
     }
