@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
         char message_utilisateur[100]; 
         printf("Ecrivez ce que vous voulez ajouter : \n");
         fgets(message_utilisateur,100,stdin); 
-        ecrire_dans_fichier("./fichierTestmodif.txt", message_utilisateur);
+        ecrire_dans_fichier("./jpp.txt", message_utilisateur);
         
     }
    

@@ -49,14 +49,14 @@ int main(){
         printf("Entrez la phrase que vous souhaitez ajouter : \n");
         fgets(message_utilisateur, 500,stdin); // message_utilisateur etant deja un pointeur, nous n'avons pas besoin du &. "%[\n]s" permet de recuperer la chaine de caractere jusqu'au saut de ligne.
         
-        ecrire_dans_fichier("./fichierModif.txt", message_utilisateur,fd ); // Nous voulons ecrire une chaine de caractere dons nous ne mettons pas * devant message_utilisateur
+        ecrire_dans_fichier("./fichierModif.txt", message_utilisateur ); // Nous voulons ecrire une chaine de caractere dons nous ne mettons pas * devant message_utilisateur
         printf("message utilisateur : %s \n", message_utilisateur);/* XXXXX rien ne s'affiche ... pourquoi ??????? */
     }
 
     else if (action_utilisateur == 'l')
     { // Idem mais en lecture => else if c'est pour etre sur que si l'on rentre dans une des conditions, nous ne rentrons pas dans les autres
         fd = fopen("fichierModif.txt","r");
-        lire_fichier("./fichierModif.txt",fd);
+        lire_fichier("./fichierModif.txt");
     }
 
     else { // Message d'erreur si aucune des deux lettres n'est pas entree

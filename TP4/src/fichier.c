@@ -11,20 +11,20 @@ fichier et écrire le message saisi par l'utilisateur dans le fichier. */
 #include <string.h>
 #include <stdlib.h>
 
-char lire_fichier(char *nom_fichier, FILE* fd) {
+char lire_fichier(char *nom_fichier) {
     // Fonction renvoyant les caracteres presents dans le fichier 
     char content[2000]; // Definition  du contenu du fichier de 2000 caracteres max
-    // FILE* fd;
-    // int fd, count, size; // declaration des entiers utiles
-    // fd = fopen (nom_fichier, O_RDONLY); // ouverture du fichier : fichier.txt
-    // size = read(fd, content, sizeof(content)); 
+    //FILE* fd;
+    int fd, count, size; // declaration des entiers utiles
+    fd = open (nom_fichier, O_RDONLY); // ouverture du fichier : fichier.txt
+    size = read(fd, content, sizeof(content)); 
     
-    fgets(content,2000,fd);
-    // for (count = 0; count < size; count ++) {
-    //     printf("%c", content[count]); 
-    // }
-    fclose(fd);
-    printf("\n");
+    //fread(content,sizeof(char),sizeof(content)/sizeof(content[0]),fd);
+    for (count = 0; count < size; count ++) {
+       printf("%c", content[count]); 
+    }
+    close(fd);
+    
     return 0; 
 }; 
   
@@ -33,7 +33,7 @@ char ecrire_dans_fichier(char* nom_fichier,char *message) { // Les arguments son
     // strcpy(content, message) ; // Copie de la chaine de caractere message dans content
     
     FILE* fd;
-    fd = fopen (nom_fichier, "w+");
+    fd = fopen (nom_fichier, "a");
     // size = write(fd, content, strlen(content)); 
                                                     /* Ecriture uniquement de la longueur de la chaine de caractere grâce à "strlen"  --> sizeof() completait avec des caracteres aleatoires pour obtenir la longueur declaree ligne 27 */
     fputs(message,fd);
