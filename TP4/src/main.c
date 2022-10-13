@@ -2,8 +2,8 @@
 // On inclut les fichiers dans lequel les fonctions sont définies : 
 #include "operator.h"
 #include "fichier.h" 
-// #include <stdlib.h>
-// #include <string.h>
+#include <stdlib.h>
+#include <string.h>
 #define stdin   __stdinp
 
 int main(){
@@ -37,7 +37,7 @@ int main(){
     printf("====================EXO 2 =====================\n \n \n");
     char action_utilisateur;
     printf("Voulez vous lire (l) ou ecrire (e) le fichier ? \n"); // Demande a l'utilisateur ce qu'il veut faire sur le fichier
-    scanf("%c", &action_utilisateur); // %c parce qu'on ne demande pas une chaine de caractere mais un caractere unique donc =/= str /!\ on utilise &variable dans scanf
+    fgets(&action_utilisateur,2,stdin); // %c parce qu'on ne demande pas une chaine de caractere mais un caractere unique donc =/= str /!\ on utilise &variable dans scanf
 
     if( action_utilisateur == 'e') { // Si l'utilisateur ecrit e, nous appelons la fonction ecriture
                                     //'e' permet de comparer un caractere a un autre
@@ -45,7 +45,7 @@ int main(){
         char message_utilisateur[100]="charles"; // Definition de la taille max d'un message
         printf("message utilisateur : %s \n", message_utilisateur);
 
-        printf("Entrez la phrase que vous souhaitez ajouter : \n");
+        fprintf("Entrez la phrase que vous souhaitez ajouter : \n");
         fgets(message_utilisateur, 1000, stdin); // message_utilisateur etant deja un pointeur, nous n'avons pas besoin du &. "%[\n]s" permet de recuperer la chaine de caractere jusqu'au saut de ligne.
 
         ecrire_dans_fichier("./fichierModif.txt", message_utilisateur ); // Nous voulons ecrire une chaine de caractere dons nous ne mettons pas * devant message_utilisateur

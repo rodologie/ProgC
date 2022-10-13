@@ -11,17 +11,12 @@ Par exemple, ETIdiant.txt */
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdlib.h>
 
-char ecrire_dans_fichier(char* nom_fichier,char* message ) { // Les arguments sont des pointeurs
-    char content[500]; // Declaration d'une variable content qui contient la chaine de caractere du message de longueur 500 max
-    strcpy(content, message) ; // Copie de la chaine de caractere message dans content
-    
-    int fd, size;
-    fd = open (nom_fichier, O_CREAT|O_WRONLY|O_APPEND, S_IRUSR|S_IWUSR);
-    size = write(fd, content, strlen(content)); // Ecriture uniquement de la longueur de la chaine de caractere grâce à "strlen" 
-                                                //--> sizeof() completait avec des caracteres aleatoires pour obtenir la longueur declaree ligne 27
-    close(fd);
-    return 0;
+char ecrire_dans_fichier(char* nom_fichier,char *message ) { // Les arguments sont des pointeurs
+    FILE *fd = fopen(nom_fichier,"w");
+    fprint(fd,"%s",message);
+    fclose(fd);
 };
 struct Etudiant{
 /* Creation la structure avec les donnees qui nous interessent */
@@ -34,7 +29,7 @@ struct Etudiant{
 int main() {
     struct Etudiant ETI[5];
     
-   for (int i =0 ; i<5 ; i++){
+   for (int i =0 ; i<2 ; i++){
 
         char nom[15];
         printf("Entrez un nom : ");
@@ -62,11 +57,11 @@ int main() {
 
     int k;
     for(k=0; k< sizeof(ETI); k++) { // JE NE SAIS PAS COMMENT FAIRE POUR QUE LA STRUCT DEVIENNE UN CHAR ET QUE JE PUISSE LES ECRIRE :)
-        ecrire_dans_fichier("./Etudiant_bd.txt",ETI->nom[k]);
-        ecrire_dans_fichier("./Etudiant_bd.txt",ETI->prenom[k]);
-        ecrire_dans_fichier("./Etudiant_bd.txt", ETI->addresse[k]);
-        ecrire_dans_fichier("./Etudiant_bd.txt",ETI->notes);
-        ecrire_dans_fichier("./Etudiant_bd.txt"," \n");
+        ecrire_dans_fichier("./etudiant_bd2.txt",ETI[k].nom);
+        ecrire_dans_fichier("./etudiant_bd2.txt",ETI[k].prenom);
+        ecrire_dans_fichier("./etudiant_bd2.txt", ETI[k].addresse);
+        ecrire_dans_fichier("./etudiant_bd2.txt",ETI[k].notes);
+        ecrire_dans_fichier("./etudiant_bd2.txt"," \n");
     }
     
     
