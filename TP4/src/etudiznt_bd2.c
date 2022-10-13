@@ -28,14 +28,11 @@ struct Etudiant{
     char prenom[50];
     char nom[50];
     char addresse[100];
-    short notes;
+    short notes[10];
 };
 
 int main() {
     struct Etudiant ETI[5];
-    {
-        /* data */
-    };
     
    for (int i =0 ; i<5 ; i++){
 
@@ -64,10 +61,10 @@ int main() {
 
     int k;
     for(k=0; k< sizeof(ETI); k++) { // JE NE SAIS PAS COMMENT FAIRE POUR QUE LA STRUCT DEVIENNE UN CHAR ET QUE JE PUISSE LES ECRIRE :)
-        ecrire_dans_fichier("./Etudiant_bd.txt",ETI->nom[k]);
-        ecrire_dans_fichier("./Etudiant_bd.txt",ETI->prenom[k]);
-        ecrire_dans_fichier("./Etudiant_bd.txt", ETI->addresse[k]);
-        ecrire_dans_fichier("./Etudiant_bd.txt",ETI->notes[k]);
+        ecrire_dans_fichier("./Etudiant_bd.txt",ETI[k].nom);
+        ecrire_dans_fichier("./Etudiant_bd.txt",ETI[k].prenom);
+        ecrire_dans_fichier("./Etudiant_bd.txt", ETI[k].addresse);
+        ecrire_dans_fichier("./Etudiant_bd.txt",ETI[k].notes);
         ecrire_dans_fichier("./Etudiant_bd.txt"," \n");
     }
     
