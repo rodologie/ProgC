@@ -28,14 +28,11 @@ struct Etudiant{
     char prenom[50];
     char nom[50];
     char addresse[100];
-    short notes;
+    short notes[10];
 };
 
 int main() {
     struct Etudiant ETI[5];
-    {
-        /* data */
-    };
     
    for (int i =0 ; i<5 ; i++){
 
