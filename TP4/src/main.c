@@ -4,7 +4,11 @@
 #include "fichier.h" 
 #include <stdlib.h>
 #include <string.h>
+<<<<<<< HEAD
 #define stdin   __stdinp
+=======
+// #define stdin   __stdinp
+>>>>>>> 582c261ea2bfef3a7a2b9ef2d6a1565d9ce195b9
 
 int main(){
     printf("====================EXO 1 =====================\n \n \n");
@@ -35,24 +39,24 @@ int main(){
     printf("%d \n",res);
 
     printf("====================EXO 2 =====================\n \n \n");
-    char action_utilisateur;
+    char *action_utilisateur;
     printf("Voulez vous lire (l) ou ecrire (e) le fichier ? \n"); // Demande a l'utilisateur ce qu'il veut faire sur le fichier
     fgets(&action_utilisateur,2,stdin); // %c parce qu'on ne demande pas une chaine de caractere mais un caractere unique donc =/= str /!\ on utilise &variable dans scanf
 
-    if( action_utilisateur == 'e') { // Si l'utilisateur ecrit e, nous appelons la fonction ecriture
-                                    //'e' permet de comparer un caractere a un autre
-        
+    if( strcmp(action_utilisateur, ecrire) == 1) { // Si l'utilisateur ecrit e, nous appelons la fonction ecriture
+                                              //'e' permet de comparer un caractere a un autre
         char message_utilisateur[100]="charles"; // Definition de la taille max d'un message
         printf("message utilisateur : %s \n", message_utilisateur);
 
-        fprintf("Entrez la phrase que vous souhaitez ajouter : \n");
-        fgets(message_utilisateur, 1000, stdin); // message_utilisateur etant deja un pointeur, nous n'avons pas besoin du &. "%[\n]s" permet de recuperer la chaine de caractere jusqu'au saut de ligne.
+        printf("Entrez la phrase que vous souhaitez ajouter : \n");
+        fgets(message_utilisateur, 100, stdin); // message_utilisateur etant deja un pointeur, nous n'avons pas besoin du &. "%[\n]s" permet de recuperer la chaine de caractere jusqu'au saut de ligne.
 
         ecrire_dans_fichier("./fichierModif.txt", message_utilisateur ); // Nous voulons ecrire une chaine de caractere dons nous ne mettons pas * devant message_utilisateur
         printf("message utilisateur : %s \n", message_utilisateur);/* XXXXX rien ne s'affiche ... pourquoi ??????? */
     }
 
-    else if( action_utilisateur == 'l') { // Idem mais en lecture => else if c'est pour etre sur que si l'on rentre dans une des conditions, nous ne rentrons pas dans les autres
+    else if (strcmp(action_utilisateur, lire) == 1)
+    { // Idem mais en lecture => else if c'est pour etre sur que si l'on rentre dans une des conditions, nous ne rentrons pas dans les autres
         lire_fichier("./fichierModif.txt");
     }
 
