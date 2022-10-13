@@ -9,6 +9,7 @@ fichier et écrire le message saisi par l'utilisateur dans le fichier. */
 #include <unistd.h>
 #include "fichier.h"
 #include <string.h>
+#include <stdlib.h>
 
 char lire_fichier(char *nom_fichier) {
     // Fonction renvoyant les caracteres presents dans le fichier 

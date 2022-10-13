@@ -11,17 +11,17 @@ Par exemple, etudiant.txt */
 #include <unistd.h>
 #include <string.h>
 
-char ecrire_dans_fichier(char* nom_fichier,char* message ) { // Les arguments sont des pointeurs
-    char content[500]; // Declaration d'une variable content qui contient la chaine de caractere du message de longueur 500 max
-    strcpy(content, message) ; // Copie de la chaine de caractere message dans content
+// char ecrire_dans_fichier(char* nom_fichier,char* message ) { // Les arguments sont des pointeurs
+//     char content[500]; // Declaration d'une variable content qui contient la chaine de caractere du message de longueur 500 max
+//     strcpy(content, message) ; // Copie de la chaine de caractere message dans content
     
-    int fd, size;
-    fd = open (nom_fichier, O_CREAT|O_WRONLY|O_APPEND, S_IRUSR|S_IWUSR);
-    size = write(fd, content, strlen(content)); // Ecriture uniquement de la longueur de la chaine de caractere grâce à "strlen" 
-                                                //--> sizeof() completait avec des caracteres aleatoires pour obtenir la longueur declaree ligne 27
-    close(fd);
-    return 0;
-};
+//     int fd, size;
+//     fd = open (nom_fichier, O_CREAT|O_WRONLY|O_APPEND, S_IRUSR|S_IWUSR);
+//     size = write(fd, content, strlen(content)); // Ecriture uniquement de la longueur de la chaine de caractere grâce à "strlen" 
+//                                                 //--> sizeof() completait avec des caracteres aleatoires pour obtenir la longueur declaree ligne 27
+//     close(fd);
+//     return 0;
+// };
 struct etudiant{
 /* Creation la structure avec les donnees qui nous interessent */
     char prenom[50];
@@ -33,6 +33,7 @@ struct etudiant{
 
 int main() {
 /* Definition des donnees a chaque identifiant */
+    printf("entree main ");
     struct etudiant eleve1 = {"Pierre", "Dupond", "11 rue Salsa","Lyon",15};
     struct etudiant eleve2 = {"Rodolphe", "Lajugie", "97 rue Duguesclin","Lyon",11};
     struct etudiant eleve3 = {"Valentin", "Barriquand", "12Ter rue Inkermann","Villeurbanne",2};
@@ -47,16 +48,36 @@ int main() {
     liste_eleve[3]= eleve4;
     liste_eleve[4]= eleve5;
 
+    printf("avant  la boucle");
     int k;
-    for(k=0; k< sizeof(liste_eleve); k++) { // JE NE SAIS PAS COMMENT FAIRE POUR QUE LA STRUCT DEVIENNE UN CHAR ET QUE JE PUISSE LES ECRIRE :)
+    for(k=0; k< 2; k++) { // JE NE SAIS PAS COMMENT FAIRE POUR QUE LA STRUCT DEVIENNE UN CHAR ET QUE JE PUISSE LES ECRIRE :)
+        printf("en haut de la boucle");
         char informations[200];
-        char np[200], rv[200], np_rv[400];
-        np = strcat(liste_eleve[k].prenom,liste_eleve[k].nom);
-        rv = strcat(liste_eleve[k].rue,liste_eleve[k].ville);
-        np_rv = strcat(np,rv);
-        informations = strcat(np_rv,liste_eleve[k].notes );
+        // char np[200], rv[200], np_rv[400];
+        // np = strcat(liste_eleve[k].prenom,liste_eleve[k].nom);
+        // rv = strcat(liste_eleve[k].rue,liste_eleve[k].ville);
+        // np_rv = strcat(np,rv);
+        // informations = strcat(np_rv,liste_eleve[k].notes );
+        for(int i=0; liste_eleve[k].prenom[i] != '\0'; i++) {
+            informations[k] = liste_eleve[k].prenom[i];
+        }
+        for (int j=0; liste_eleve[k].nom[j] != '\0';j++ ){
+            informations[k] = liste_eleve[k].nom[j];
+        }
+        for (int j2=0; liste_eleve[k].rue[j2] != '\0';j2++ ){
+            informations[k] = liste_eleve[k].rue[j2];
+        }
+        for (int j3=0; liste_eleve[k].ville[j3] != '\0';j3++ ){
+            informations[k] = liste_eleve[k].ville[j3];
+        }
+        for (int j4=0; liste_eleve[k].notes != '\0';j4++ ){
+            informations[k] = liste_eleve[k].notes;
+        }
+        printf("jai fait la boucle");
+        printf("informations %i : %s \n",k,informations);
+        
     }
     
-    close(fd);
+    
     return 0;
 }

@@ -59,6 +59,7 @@ int main() {
         strcpy(ETI[i].nom , nom);
         strcpy(ETI[i].addresse,addresse);
         strcpy(ETI[i].notes,notes);
+        
     }
 
 
@@ -67,7 +68,7 @@ int main() {
         ecrire_dans_fichier("./Etudiant_bd.txt",ETI->nom[k]);
         ecrire_dans_fichier("./Etudiant_bd.txt",ETI->prenom[k]);
         ecrire_dans_fichier("./Etudiant_bd.txt", ETI->addresse[k]);
-        ecrire_dans_fichier("./Etudiant_bd.txt",ETI->notes[k]);
+        ecrire_dans_fichier("./Etudiant_bd.txt",ETI->notes);
         ecrire_dans_fichier("./Etudiant_bd.txt"," \n");
     }
     
