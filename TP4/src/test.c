@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 {
     char action_utilisateur; 
     printf("Voulez vous lire (l) ou ecrire (e) le fichier ? \n");
-    fgets(&action_utilisateur, 2, stdin);  
+    fgets(&action_utilisateur, 50, stdin);  
     printf(" Vous avez choisi la lettre %c !\n\n", action_utilisateur);
     
     if(action_utilisateur == 'e') { 
