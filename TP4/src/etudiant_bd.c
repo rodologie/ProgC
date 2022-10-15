@@ -46,42 +46,42 @@ int main()
         char ligne[1000] = "";
         char nom[80];
         printf("Entrez un nom : ");
-        // scanf("%[^\n]%*c",nom);
-        fgets(nom, 80, stdin);
+        scanf("%[^\n]%*c",nom);
+        // fgets(nom, 80, stdin);
         strcpy(ETI[i].nom, nom);
-        ETI[i].nom[strlen(ETI[i].nom) - 1] = '\0';
+        // ETI[i].nom[strlen(ETI[i].nom) - 1] = '\0';
         strcat(ligne, ETI[i].nom);
         strcat(ligne, ", ");
 
         char prenom[80];
         printf("Entrez un prenom : ");
-        // scanf("%[^\n]%*c",prenom);
-        fgets(prenom, 80, stdin);
+        scanf("%[^\n]%*c",prenom);
+        // fgets(prenom, 80, stdin);
         strcpy(ETI[i].prenom, prenom);
-        ETI[i].prenom[strlen(ETI[i].prenom) - 1] = '\0';
+        // ETI[i].prenom[strlen(ETI[i].prenom) - 1] = '\0';
         strcat(ligne, ETI[i].prenom);
         strcat(ligne, ", ");
 
         char addresse[80];
         printf("Entrez une addresse : ");
-        // scanf("%[^\n]%*c",addresse);
-        fgets(addresse, 80, stdin);
+        scanf("%[^\n]%*c",addresse);
+        // fgets(addresse, 80, stdin);
         strcpy(ETI[i].addresse, addresse);
-        ETI[i].addresse[strlen(ETI[i].addresse) - 1] = '\0';
+        // ETI[i].addresse[strlen(ETI[i].addresse) - 1] = '\0';
         strcat(ligne, ETI[i].addresse);
         strcat(ligne, ", ");
 
         char notes[50];
         printf("Entrez une note : ");
-        // scanf("%[^\n]%*c",notes);
-        fgets(notes, 50, stdin);
+        scanf("%[^\n]%*c",notes);
+        // fgets(notes, 50, stdin);
         strcpy(ETI[i].notes, notes);
-        ETI[i].notes[strlen(ETI[i].notes) - 1] = '\0';
+        // ETI[i].notes[strlen(ETI[i].notes) - 1] = '\0';
         strcat(ligne, ETI[i].notes);
         strcat(ligne, "\n");
 
         
-        ecrire_dans_fichier("./etudiant_bd2.txt", ligne);
+        ecrire_dans_fichier("./etudiant.txt", ligne);
     }
 
     return 0;
