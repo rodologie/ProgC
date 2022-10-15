@@ -12,6 +12,7 @@ Par exemple, ETIdiant.txt */
 #include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
+#include "fichier.h"
 
 
 char ecrire_dans_fichier(char *nom_fichier, char *message)
@@ -37,53 +38,53 @@ struct Etudiant{
 
 int main() {
     struct Etudiant ETI[5];
-    char ligne[1000]="";
     // ajouter une variable intermédiaire pour ne pas perdre le contenu
    for (int i =0 ; i<5 ; i++){
 
-        char nom[80];
-        printf("Entrez un nom : ");
-        // scanf("%[^\n]%*c",nom);
-        fgets(nom, 80, stdin);
-        strcpy(ETI[i].nom, nom);
-        strcat(ligne, ETI[i].nom);
-        ligne[strlen(ligne-1)]='\0';
-        strcat(ligne, ", ");
+       char ligne[1000] = "";
+       char nom[80];
+       printf("Entrez un nom : ");
+       // scanf("%[^\n]%*c",nom);
+       fgets(nom, 80, stdin);
+       strcpy(ETI[i].nom, nom);
+       ETI[i].nom[strlen(ETI[i].nom) - 1] = '\0';
+       strcat(ligne, ETI[i].nom);
+       strcat(ligne, ", ");
 
-        char prenom[80];
-        printf("Entrez un prenom : ");
-        // scanf("%[^\n]%*c",prenom);
-        fgets(prenom, 80, stdin);
-        strcpy(ETI[i].prenom, prenom);
-        strcat(ligne, ETI[i].prenom);
-        ligne[strlen(ligne - 1)] = '\0';
-        strcat(ligne, ", ");
+       char prenom[80];
+       printf("Entrez un prenom : ");
+       // scanf("%[^\n]%*c",prenom);
+       fgets(prenom, 80, stdin);
+       strcpy(ETI[i].prenom, prenom);
+       ETI[i].prenom[strlen(ETI[i].prenom) - 1] = '\0';
+       strcat(ligne, ETI[i].prenom);
+       strcat(ligne, ", ");
 
-        char addresse[80];
-        printf("Entrez une addresse : ");
-        // scanf("%[^\n]%*c",addresse);
-        fgets(addresse, 80, stdin);
-        strcpy(ETI[i].addresse, addresse);
-        strcat(ligne, ETI[i].addresse);
-        ligne[strlen(ligne - 1)] = '\0';
-        strcat(ligne, ", ");
+       char addresse[80];
+       printf("Entrez une addresse : ");
+       // scanf("%[^\n]%*c",addresse);
+       fgets(addresse, 80, stdin);
+       strcpy(ETI[i].addresse, addresse);
+       ETI[i].addresse[strlen(ETI[i].addresse) - 1] = '\0';
+       strcat(ligne, ETI[i].addresse);
+       strcat(ligne, ", ");
 
-        char notes[50];
-        printf("Entrez une note : ");
-        // scanf("%[^\n]%*c",notes);
-        fgets(notes, 50, stdin);
-        strcpy(ETI[i].notes, notes);
-        strcat(ligne, ETI[i].notes);
-        ligne[strlen(ligne - 1)] = '\0';
-        strcat(ligne, ", ");
+       char notes[50];
+       printf("Entrez une note : ");
+       // scanf("%[^\n]%*c",notes);
+       fgets(notes, 50, stdin);
+       strcpy(ETI[i].notes, notes);
+       ETI[i].notes[strlen(ETI[i].notes) - 1] = '\0';
+       strcat(ligne, ETI[i].notes);
+       strcat(ligne, "\n");
 
-        // char prenom[50] = "rodolphe";
-        // char nom[50] = "Lajugie";
-        // char addresse[50] = "97 rue Duguesclin";
-        // char notes[20] = "10";
+       // char prenom[50] = "rodolphe";
+       // char nom[50] = "Lajugie";
+       // char addresse[50] = "97 rue Duguesclin";
+       // char notes[20] = "10";
 
-        // il faut créer une variable ligne 
-        ecrire_dans_fichier("./etudiant_bd2.txt", ligne);
+       // il faut créer une variable ligne
+       ecrire_dans_fichier("./etudiant_bd2.txt", ligne);
         
     }
 
