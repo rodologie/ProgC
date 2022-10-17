@@ -36,7 +36,7 @@ int main(){
 
     printf("====================EXO 2 =====================\n \n \n");
     // char action_utilisateur;
-    // printf("Voulez vous lire (l) ou ecrire (e) le fichier ? \n"); // Demande a l'utilisateur ce qu'il veut faire sur le fichier
+    // printf("Voulez vous lire (l) ou ecrire (e) le fichier ? \n"); 
     // scanf("%c", &action_utilisateur); // %c parce qu'on ne demande pas une chaine de caractere mais un caractere unique donc =/= str /!\ on utilise &variable dans scanf
     
     // FILE* fd;
@@ -64,7 +64,7 @@ int main(){
     //     return 1;
     // }
     char action_utilisateur[3];
-    printf("Voulez vous lire (l) ou ecrire (e) le fichier ? \n");
+    printf("Voulez vous lire (l) ou ecrire (e) le fichier ? \n"); // Demande a l'utilisateur ce qu'il veut faire sur le fichier
     fgets(action_utilisateur, 3, stdin);
     printf(" Vous avez choisi la lettre %s !\n\n", action_utilisateur);
 

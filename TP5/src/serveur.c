@@ -7,7 +7,7 @@
 
 #include <sys/types.h>
 #include <sys/socket.h>
-#include <sys/epoll.h>
+//#include <sys/epoll.h>
 #include <netinet/in.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -38,6 +38,7 @@ int recois_envoie_message(int socketfd)
 {
   struct sockaddr_in client_addr;
   char data[1024];
+  char data_back[1024];
 
   unsigned int client_addr_len = sizeof(client_addr);
 
@@ -51,6 +52,7 @@ int recois_envoie_message(int socketfd)
 
   // la réinitialisation de l'ensemble des données
   memset(data, 0, sizeof(data));
+  memset(data_back, 0, sizeof(data_back));
 
   // lecture de données envoyées par un client
   int data_size = read(client_socket_fd, (void *)data, sizeof(data));
@@ -69,12 +71,29 @@ int recois_envoie_message(int socketfd)
   char code[10];
   sscanf(data, "%s:", code);
 
-  // Si le message commence par le mot: 'message:'
-  if (strcmp(code, "message:") == 0)
+  /* Demande du message a renvoyer : */
+  char message_back[1024];
+  printf("Quel message voulez-vous envoyer ? :");
+  fgets(message_back,sizeof(message_back),stdin);
+  strcat(data_back, message_back); /* on copie le message dans data_back */
+
+  int write_status = write(client_socket_fd, data_back, strlen(data_back)); /* Mode ecriture dans la socket */
+  if (write_status < 0)
   {
-    renvoie_message(client_socket_fd, data);
+    perror("erreur ecriture");
+    exit(EXIT_FAILURE);
   }
 
+  // Si le message commence par le mot: 'message:'
+  // if (strcmp(code, "message:") == 0)
+  // {
+  //   renvoie_message(client_socket_fd, data);
+  // }
+
+   if (strcmp(data_back, "message retour:") == 0)
+  {
+    renvoie_message(client_socket_fd, data_back);
+  }
   // fermer le socket
   close(socketfd);
   return (EXIT_SUCCESS);

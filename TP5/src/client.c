@@ -90,5 +90,7 @@ int main()
   // appeler la fonction pour envoyer un message au serveur
   envoie_recois_message(socketfd);
 
+
+
   close(socketfd);
 }
