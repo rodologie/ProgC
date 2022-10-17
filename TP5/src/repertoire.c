@@ -66,6 +66,87 @@ void lecture_dossier_recursif(char *chemin)
     closedir(dirp);
 }
 
+void lire_dossier_iteratif(char *chemin){
+   /*  DIR *d;
+    struct dirent *dir;
+    d = opendir(".");
+    if (d)
+    {
+        while ((dir = readdir(d)) != NULL)
+        {
+           printf("%s\n", dir->d_name);
+        }
+        closedir(d);
+        
+    } */
+   int compteur = 1;
+   DIR *dirp = opendir(chemin);
+
+   if (dirp == NULL)
+   {
+       perror("opendir");
+       return ;
+   }
+   
+   struct dirent *ent;
+   ent = readdir(dirp);
+   char adresse_dir[256][256];
+   int ptr_liste = 1;
+   char copie[256] = ""; // on crée une chaine de caractères de taille importante pour accueillir l'adresse complète
+   // on copie l'adresse complète dans la chaîne copie
+   strcpy(copie, chemin);
+   strcat(copie, "/");
+   strcat(copie, ent->d_name);
+   strcpy(adresse_dir[0], copie);
+   closedir(dirp);
+   int cpt2 = 0;
+
+   while (compteur != 0)
+   {
+       DIR *dirp = opendir(chemin);
+
+       while (1)
+       {
+           ent = readdir(dirp);
+
+           if (ent == NULL)
+           {
+               compteur--;
+               break;
+           }
+
+           if (strcmp(ent->d_name, "..") == 0)
+           {
+               continue;
+           }
+
+           if (strcmp(ent->d_name, ".") == 0)
+           {
+               continue;
+           }
+
+           if (ent->d_type == DT_DIR)
+           { // si on est sur un dossier
+               printf("chemin %s\n", ent->d_name);
+               // on copie l'adresse complète dans la chaîne copie
+               strcpy(copie, chemin);
+               strcat(copie, "/");
+               strcat(copie, ent->d_name);
+               strcpy(adresse_dir[ptr_liste], copie);
+               ptr_liste++;
+               compteur++;
+               printf("\n");
+           }
+
+           printf("%s\n", ent->d_name);
+           printf("\n");
+       }
+
+       closedir(dirp);
+       strcpy(chemin, adresse_dir[cpt2]);
+       cpt2++;
+   }
+}
 
 int main(int argc, char **argv){
     if (argc < 2)
@@ -73,6 +154,6 @@ int main(int argc, char **argv){
         printf("Usage: readdir path\n");
         return (EXIT_FAILURE);
     }
-    lecture_dossier_recursif(argv[1]);
+    lire_dossier_iteratif(argv[1]);
      return 0;
 }
