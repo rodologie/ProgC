@@ -91,13 +91,14 @@ int recois_envoie_message(int socketfd)
     //   renvoie_message(client_socket_fd, data);
     // }
 
-     if (strcmp(data_back, "message retour:") == 0)
+     if (strcmp(data_back, "message:") == 0)
     {
       renvoie_message(client_socket_fd, data_back);
     }
   }
-  if(strcmp(code,"calcul:")) {
-    recois_numeros_calcule(client_socket_fd);
+  else if(strcmp(code,"calcul:"))
+  {
+      recois_numeros_calcule(client_socket_fd);
   }
   
   // fermer le socket
@@ -184,24 +185,25 @@ int main()
 
   // Écouter les messages envoyés par le client
   listen(socketfd, 10);
+  recois_envoie_message(socketfd);
 
-  /* Demande de l'action à realiser au client */
-  char action_utilisateur[3];
-  printf("Voulez-vous envoyer un message (m) ou un calcul (c) ? ");
-  fgets(action_utilisateur, sizeof(action_utilisateur),stdin);
+  // /* Demande de l'action à realiser au client */
+  // char action_utilisateur[3];
+  // printf("Voulez-vous envoyer un message (m) ou un calcul (c) ? ");
+  // fgets(action_utilisateur, sizeof(action_utilisateur),stdin);
 
-  // appeler la fonction pour envoyer un message au serveur
-  if (action_utilisateur[0] == 'm') {
-    recois_envoie_message(socketfd); // Lire et repondre au client
-  }
+  // // appeler la fonction pour envoyer un message au serveur
+  // if (action_utilisateur[0] == 'm') {
+  //   recois_envoie_message(socketfd); // Lire et repondre au client
+  // }
   
-  else if (action_utilisateur[0]=='c') {
-    recois_numeros_calcule(socketfd); // Calculer et repondre au client
-  }
+  // else if (action_utilisateur[0]=='c') {
+  //   recois_numeros_calcule(socketfd); // Calculer et repondre au client
+  // }
   
-  else {
-    printf("Saisie non reconnue");
-  }
+  // else {
+  //   printf("Saisie non reconnue");
+  // }
   
   
   return 0;

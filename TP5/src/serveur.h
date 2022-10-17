@@ -15,5 +15,6 @@
  * en retour
  */
 int recois_envoie_message(int socketfd);
+int recois_numeros_calcule(int socketfd);
 
 #endif
