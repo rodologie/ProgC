@@ -4,4 +4,6 @@
 #include <dirent.h>
 #include <sys/types.h>
 
-int lecture_fichier(char *message);
+int lecture_dossier(char *);
+
+int lecture_dossier_recursif(char *);
