@@ -63,19 +63,19 @@ int main(){
     //     printf("La demande n'est pas reconnue \n \n");
     //     return 1;
     // }
-    char action_utilisateur;
+    char action_utilisateur[3];
     printf("Voulez vous lire (l) ou ecrire (e) le fichier ? \n");
-    fgets(&action_utilisateur, 50, stdin);
-    printf(" Vous avez choisi la lettre %c !\n\n", action_utilisateur);
+    fgets(action_utilisateur, 3, stdin);
+    printf(" Vous avez choisi la lettre %s !\n\n", action_utilisateur);
 
-    if (action_utilisateur == 'e')
+    if (action_utilisateur[0] == 'e')
     {
         char message_utilisateur[100];
         printf("Ecrivez ce que vous voulez ajouter : \n");
         fgets(message_utilisateur, 100, stdin);
         ecrire_dans_fichier("./fichierModif.txt", message_utilisateur);
     }
-    else if (action_utilisateur == 'l')
+    else if (action_utilisateur[0] == 'l')
     { // Idem mais en lecture => else if c'est pour etre sur que si l'on rentre dans une des conditions, nous ne rentrons pas dans les autres
         lire_fichier("./fichierModif.txt");
     }
