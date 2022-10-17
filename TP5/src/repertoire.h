@@ -6,4 +6,4 @@
 
 int lecture_dossier(char *);
 
-int lecture_dossier_recursif(char *);
+void lecture_dossier_recursif(char *);

@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <dirent.h>
 #include <sys/types.h>
+#include <string.h>
 
 
 int lecture_dossier(char *chemin) {
@@ -12,7 +13,7 @@ int lecture_dossier(char *chemin) {
 
     if (dirp == NULL) {
         perror("opendir");
-        return (EXIT_FAILURE);
+        // return (EXIT_FAILURE);
     }
     struct dirent * ent;
 
@@ -29,7 +30,7 @@ int lecture_dossier(char *chemin) {
     
 }
 
-int lecture_dossier_recursif(char *chemin)
+void lecture_dossier_recursif(char *chemin)
 {
 
     DIR *dirp = opendir(chemin);
@@ -37,7 +38,7 @@ int lecture_dossier_recursif(char *chemin)
     if (dirp == NULL)
     {
         perror("opendir");
-        return (EXIT_FAILURE);
+        return ;
     }
     struct dirent *ent;
 
@@ -48,11 +49,21 @@ int lecture_dossier_recursif(char *chemin)
         {
             break;
         }
+        if (ent->d_name[0] == '.')
+        {
+            continue;
+        }
         printf("%s\n", ent->d_name);
-        lecture_dossier_recursif(ent->d_name);
+        if (ent -> d_type == DT_DIR) {
+            char path[500];
+            strcpy(path, chemin);
+            strcat(path,"/");
+            strcat(path, ent->d_name);
+            lecture_dossier_recursif(path);
+            printf("\n");
+        }
     }
     closedir(dirp);
-    return (0);
 }
 
 
@@ -62,6 +73,6 @@ int main(int argc, char **argv){
         printf("Usage: readdir path\n");
         return (EXIT_FAILURE);
     }
-    int status = lecture_dossier_recursif(argv[1]);
-    return status;
+    lecture_dossier_recursif(argv[1]);
+     return 0;
 }
