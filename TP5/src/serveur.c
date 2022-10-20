@@ -20,7 +20,7 @@
  */
 int renvoie_message(int client_socket_fd, char *data)
 {
-  int data_size = write(client_socket_fd, (void *)data, strlen(data));
+  int data_size = write(client_socket_fd, (void *)data, strlen(data)); // ecriture vers le client
 
   if (data_size < 0)
   {
@@ -65,14 +65,15 @@ int recois_envoie_message(int socketfd)
 
   /*
    * extraire le code des données envoyées par le client.
-   * Les données envoyées par le client peuvent commencer par le mot "message :" ou un autre mot.
+   * Les données envoyées par le client peuvent commencer par le mot "message :" ou le mot "calcul: " .
    */
-  printf("Message recu: %s\n", data);
+  printf("Message recu: %s\n", data); // Reception du message client.
   char code[10];
-  sscanf(data, "%s:", code);
+  sscanf(data, "%s:", code); // Recuperation du premier mot de la chaine de caractere : "message: " ou "calcul: "
 
-  if(strcmp(code,"message:")) {
-      /* Demande du message a renvoyer : */
+  if(strcmp(code,"message: ")==-32)  // Condition pour renvoyer un message, il faut que le client ait envoyé une demande de message debutant par "message:"
+  {
+    /* Demande du message a renvoyer : */
     char message_back[1024];
     printf("Quel message voulez-vous envoyer ? :");
     fgets(message_back,sizeof(message_back),stdin);
@@ -85,20 +86,19 @@ int recois_envoie_message(int socketfd)
       exit(EXIT_FAILURE);
     }
 
-    // Si le message commence par le mot: 'message:'
-    // if (strcmp(code, "message:") == 0)
-    // {
-    //   renvoie_message(client_socket_fd, data);
-    // }
-
-     if (strcmp(data_back, "message:") == 0)
+    if (strcmp(data_back, "message retour:") == 0) // Condition pour renvoyer un message au client
     {
-      renvoie_message(client_socket_fd, data_back);
+      renvoie_message(client_socket_fd, data_back); 
     }
   }
-  else if(strcmp(code,"calcul:"))
+
+  else if(strcmp(code,"calcul: ")== -32) // Idem que pour la première condition mais cette fois le client demande un calcul
   {
-      recois_numeros_calcule(client_socket_fd);
+    recois_numeros_calcule(client_socket_fd,data); // Fonction qui effectue le calcul
+  }
+
+  else {
+    printf("Erreur de compréhension \n");
   }
   
   // fermer le socket
@@ -106,31 +106,12 @@ int recois_envoie_message(int socketfd)
   return (EXIT_SUCCESS);
 }
 
-int recois_numeros_calcule(int socketfd) {
-  // struct sockaddr_in client_addr;
-  // unsigned int client_addr_len = sizeof(client_addr);
-
-  char data[1024];
-  memset(data, 0, sizeof(data));
-  // // nouvelle connection de client  
-  // int client_socket_fd = accept(socketfd, (struct sockaddr *)&client_addr, &client_addr_len);
-  // if (client_socket_fd < 0)
-  // {
-  //   perror("accept");
-  //   return (EXIT_FAILURE);
-  // }
-
-  int data_size = read(socketfd, (void *)data, sizeof(data));
-
-  if (data_size < 0)
-  {
-    perror("erreur lecture");
-    return (EXIT_FAILURE);
-  }
+int recois_numeros_calcule(int socketfd, char *data) 
+{
   float res;
-  float num1, num2; 
-  char op[2], code[100];
-  sscanf(data,"%s%s%f%f", code,op,&num1, &num2);
+  float num1, num2;  // Déclaration des variables flottantes permettant le calcul
+  char op[2], code[100]; // Déclaration du premier caractere de la chaine envoyée par le client : -,+,/, ou * et du code "calcul: "
+  sscanf(data,"%s%s%f%f", code,op,&num1, &num2); // Recuperation des infos de la chaine de caractere et placement dans la bonne variable
     
   switch (op[0]){
     case '+':  res = num1 + num2;  // addition
@@ -145,7 +126,7 @@ int recois_numeros_calcule(int socketfd) {
 
   char Value[100] ;
   sprintf(Value,"%f",res); // permet de convertir en chaine de caractere
-  renvoie_message(socketfd, Value);
+  renvoie_message(socketfd, Value); // Demande à la fonction adequate de renvoyer le resultat au client
   return 0;
 }
 int main()
