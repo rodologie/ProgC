@@ -168,24 +168,5 @@ int main()
   listen(socketfd, 10);
   recois_envoie_message(socketfd);
 
-  // /* Demande de l'action à realiser au client */
-  // char action_utilisateur[3];
-  // printf("Voulez-vous envoyer un message (m) ou un calcul (c) ? ");
-  // fgets(action_utilisateur, sizeof(action_utilisateur),stdin);
-
-  // // appeler la fonction pour envoyer un message au serveur
-  // if (action_utilisateur[0] == 'm') {
-  //   recois_envoie_message(socketfd); // Lire et repondre au client
-  // }
-  
-  // else if (action_utilisateur[0]=='c') {
-  //   recois_numeros_calcule(socketfd); // Calculer et repondre au client
-  // }
-  
-  // else {
-  //   printf("Saisie non reconnue");
-  // }
-  
-  
   return 0;
 }
