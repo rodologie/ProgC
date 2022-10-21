@@ -64,7 +64,7 @@ int envoie_operateur_numeros(int socketfd) {
 
   // Demandez à l'utilisateur d'entrer un message
   char message[1024];
-  printf("Choisissez le type d'operation (-,+) et les chiffres à operer : ");
+  printf("Choisissez le type d'operation (-,+,*,/) et les chiffres à operer : ");
   fgets(message, sizeof(message), stdin);
   strcpy(data,"calcul: ");
   strcat(data, message);
