@@ -12,7 +12,7 @@ int main()
     char size = lire_fichier("./rechercheFichier.txt")[2]; // Comment recuperer la variable content et size dans lire fichier ? Est-ce possible?
     for(int cpt=0 ; cpt < size; cpt ++) 
     {
-        if(strmcp(phrase, content)==0) 
+        if(strmcp(phrase, content)==0)  // meme pb
         {
             printf("Votre phrase apparait à la ligne : %d \n",cpt);
 

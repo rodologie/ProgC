@@ -71,7 +71,7 @@ int recois_envoie_message(int socketfd)
   char code[10];
   sscanf(data, "%s:", code); // Recuperation du premier mot de la chaine de caractere : "message: " ou "calcul: "
 
-  if(strcmp(code,"message: ")==-32)  // Condition pour renvoyer un message, il faut que le client ait envoyé une demande de message debutant par "message:"
+  if(strcmp(code,"message:")==0)  // Condition pour renvoyer un message, il faut que le client ait envoyé une demande de message debutant par "message:"
   {
     /* Demande du message a renvoyer : */
     char message_back[1024];
@@ -92,7 +92,7 @@ int recois_envoie_message(int socketfd)
     }
   }
 
-  else if(strcmp(code,"calcul: ")== -32) // Idem que pour la première condition mais cette fois le client demande un calcul
+  else if(strcmp(code,"calcul:")== 0) // Idem que pour la première condition mais cette fois le client demande un calcul // /!\ attention à l'espace entre les : et les guillemets ! => Il n'en faut pas
   {
     recois_numeros_calcule(client_socket_fd,data); // Fonction qui effectue le calcul
   }
