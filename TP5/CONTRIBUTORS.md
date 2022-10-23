@@ -1,2 +1,2 @@
-1. 
-2. 
+1. Rodolphe Lajugie
+2. Jeanne Claret
