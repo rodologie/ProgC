@@ -65,8 +65,9 @@ void analyse(char *pathname, char *data, int nb_couleurs)
   
   int count;
   strcpy(data, "couleurs: ");
-  char temp_string[30] = "30,"; 
-  if (cc->size <= nb_couleurs)
+  char temp_string[30] = ""; 
+  sprintf(temp_string,"%d,",nb_couleurs); // scanf permet d'ecrire dans la chaine de caractere
+  if (cc->size <= nb_couleurs) // modification des conditions avec nb_couleurs
   {
     sprintf(temp_string, "%d,", cc->size);
   }
@@ -108,11 +109,11 @@ int envoie_couleurs(int socketfd, char *pathname,int nb_couleurs)
 
 int main(int argc, char **argv)
 {
-  int nb_couleurs;
-  char N[10];
+  int nb_couleurs; // delcaration d'un entier = au nombre de couleurs
+  char N[10]; // delcaration d'un tableau pour utiliser un fgets
   printf("Choisissez le nombre de couleurs a afficher <= 30 : ");
   fgets(N,20,stdin);
-  nb_couleurs=atoi(N);
+  nb_couleurs=atoi(N); // Demande du nombre de couleur à afficher à l'utilisateur 
 
   int socketfd;
 
@@ -156,7 +157,7 @@ int main(int argc, char **argv)
   {
     // envoyer et recevoir les couleurs prédominantes
     // d'une image au format BMP (argv[1])
-    envoie_couleurs(socketfd, argv[1],nb_couleurs);
+    envoie_couleurs(socketfd, argv[1],nb_couleurs); // ajout de l'argument nb_couleurs 
   }
 
   close(socketfd);
