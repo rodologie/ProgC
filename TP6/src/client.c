@@ -108,7 +108,7 @@ int envoie_couleurs(int socketfd, char *pathname,int nb_couleurs)
 
 int main(int argc, char **argv)
 {
-  int* nb_couleurs=10;
+  int nb_couleurs;
   printf("Choisissez le nombre de couleurs a afficher <= 30 : ");
   fgets(nb_couleurs,3,stdin);
 
