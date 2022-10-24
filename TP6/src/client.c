@@ -58,16 +58,14 @@ int envoie_recois_message(int socketfd)
   return 0;
 }
 
-void analyse(char *pathname, char *data)
+void analyse(char *pathname, char *data, int nb_couleurs)
 {
   // compte de couleurs
   couleur_compteur *cc = analyse_bmp_image(pathname);
-  int* nb_couleurs=10;
-  printf("Choisissez le nombre de couleurs a afficher <= 30 : ");
-  fgets(nb_couleurs,3,stdin);
+  
   int count;
   strcpy(data, "couleurs: ");
-  char temp_string[30] = "30,"; // Augmentation du nombre de couleur pour 6.2
+  char temp_string[30] = "30,"; 
   if (cc->size <= nb_couleurs)
   {
     sprintf(temp_string, "%d,", cc->size);
@@ -92,11 +90,11 @@ void analyse(char *pathname, char *data)
   data[strlen(data) - 1] = '\0';
 }
 
-int envoie_couleurs(int socketfd, char *pathname)
+int envoie_couleurs(int socketfd, char *pathname,int nb_couleurs)
 {
   char data[1024];
   memset(data, 0, sizeof(data));
-  analyse(pathname, data);
+  analyse(pathname, data, nb_couleurs);
 
   int write_status = write(socketfd, data, strlen(data));
   if (write_status < 0)
@@ -110,6 +108,10 @@ int envoie_couleurs(int socketfd, char *pathname)
 
 int main(int argc, char **argv)
 {
+  int* nb_couleurs=10;
+  printf("Choisissez le nombre de couleurs a afficher <= 30 : ");
+  fgets(nb_couleurs,3,stdin);
+
   int socketfd;
 
   struct sockaddr_in server_addr;
@@ -152,7 +154,7 @@ int main(int argc, char **argv)
   {
     // envoyer et recevoir les couleurs prédominantes
     // d'une image au format BMP (argv[1])
-    envoie_couleurs(socketfd, argv[1]);
+    envoie_couleurs(socketfd, argv[1],nb_couleurs);
   }
 
   close(socketfd);
