@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "fichier.h"
 
 char chercher_fichier(char *nom_fichier, char* phrase)
@@ -12,8 +13,7 @@ char chercher_fichier(char *nom_fichier, char* phrase)
     int cptL =0;
     int cptM =0; 
     for (count = 0; count < size; count ++) {
-       for (int j= 0; j < sizeof(phrase); j++)
-            if (content[count]== phrase[j]) 
+            if (strcmp(phrase,content) == 0)
             {
                 cptM = cptM +1;
             }
@@ -21,18 +21,17 @@ char chercher_fichier(char *nom_fichier, char* phrase)
             {
                 cptL = cptL +1;
             }
-        printf("Il y a %d lignes d'identiques : \n", cptL);
+        printf("Il y a %d lignes identiques : \n", cptL);
         printf("Il y a %d mots de la phrase identiques : \n", cptM);
     }
     close(fd);
     
     return 0;
 }
-int main()
+int main(int argc, char *argv[])
 {
-    char phrase[100];
-    printf("Quelle phrase/ mot souhaitez-vous chercher ? : \n");
-    fgets(phrase,100,stdin);
-
-    chercher_fichier("./texteRecherche.txt",phrase);
+    // printf("Quelle phrase/ mot souhaitez-vous chercher ? : \n");
+    // fgets(phrase,100,stdin);
+    char *fichierRech = argv[2];
+    chercher_fichier("calcule.c","int");
 }
