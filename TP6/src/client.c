@@ -108,10 +108,12 @@ int envoie_couleurs(int socketfd, char *pathname,int nb_couleurs)
 
 int main(int argc, char **argv)
 {
-  int nb_couleurs;
+  int N;
+  char nb_couleurs[10];
   printf("Choisissez le nombre de couleurs a afficher <= 30 : ");
   fgets(nb_couleurs,3,stdin);
-
+  N=atoi(nb_couleurs);
+  
   int socketfd;
 
   struct sockaddr_in server_addr;
