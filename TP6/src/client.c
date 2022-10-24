@@ -65,15 +65,15 @@ void analyse(char *pathname, char *data)
 
   int count;
   strcpy(data, "couleurs: ");
-  char temp_string[10] = "10,";
-  if (cc->size < 10)
+  char temp_string[30] = "30,"; // Augmentation du nombre de couleur pour 6.2
+  if (cc->size < 31)
   {
     sprintf(temp_string, "%d,", cc->size);
   }
   strcat(data, temp_string);
 
   // choisir 10 couleurs
-  for (count = 1; count < 11 && cc->size - count > 0; count++)
+  for (count = 1; count < 31 && cc->size - count > 0; count++) // augmentation du count pour obtenir 30 couleurs ( origine : 11 )
   {
     if (cc->compte_bit == BITS32)
     {
