@@ -15,6 +15,7 @@
 
 #include "client.h"
 #include "bmp.h"
+#include "cJSON.h"
 
 /*
  * Fonction d'envoi et de réception de messages
@@ -109,11 +110,14 @@ int envoie_couleurs(int socketfd, char *pathname,int nb_couleurs)
 
 int main(int argc, char **argv)
 {
+  // Choix de l'affichage du nombre de couleurs par l'utilisateur
   int nb_couleurs; // delcaration d'un entier = au nombre de couleurs
   char N[10]; // delcaration d'un tableau pour utiliser un fgets
   printf("Choisissez le nombre de couleurs a afficher <= 30 : ");
   fgets(N,20,stdin);
   nb_couleurs=atoi(N); // Demande du nombre de couleur à afficher à l'utilisateur 
+
+  
 
   int socketfd;
 
