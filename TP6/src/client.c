@@ -86,7 +86,7 @@ void analyse(char *pathname, char *data)
     strcat(data, temp_string);
   }
 
-  // enlever le dernier virgule
+  // enlever la derniere virgule
   data[strlen(data) - 1] = '\0';
 }
 
