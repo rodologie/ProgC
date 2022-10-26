@@ -15,6 +15,7 @@
 
 #include "client.h"
 #include "bmp.h"
+#include "cJSON.h"
 
 /*
  * Fonction d'envoi et de réception de messages
@@ -58,22 +59,23 @@ int envoie_recois_message(int socketfd)
   return 0;
 }
 
-void analyse(char *pathname, char *data)
+void analyse(char *pathname, char *data, int nb_couleurs)
 {
   // compte de couleurs
   couleur_compteur *cc = analyse_bmp_image(pathname);
-
+  
   int count;
   strcpy(data, "couleurs: ");
-  char temp_string[10] = "10,";
-  if (cc->size < 10)
+  char temp_string[30] = ""; 
+  sprintf(temp_string,"%d,",nb_couleurs); // scanf permet d'ecrire dans la chaine de caractere
+  if (cc->size <= nb_couleurs) // modification des conditions avec nb_couleurs
   {
     sprintf(temp_string, "%d,", cc->size);
   }
   strcat(data, temp_string);
 
-  // choisir 10 couleurs
-  for (count = 1; count < 11 && cc->size - count > 0; count++)
+  // choisir 10 couleurs // 31
+  for (count = 1; count < (nb_couleurs+1) && cc->size - count > 0; count++) // augmentation du count pour obtenir 30 couleurs ( origine : 11 )
   {
     if (cc->compte_bit == BITS32)
     {
@@ -90,11 +92,11 @@ void analyse(char *pathname, char *data)
   data[strlen(data) - 1] = '\0';
 }
 
-int envoie_couleurs(int socketfd, char *pathname)
+int envoie_couleurs(int socketfd, char *pathname,int nb_couleurs)
 {
   char data[1024];
   memset(data, 0, sizeof(data));
-  analyse(pathname, data);
+  analyse(pathname, data, nb_couleurs);
 
   int write_status = write(socketfd, data, strlen(data));
   if (write_status < 0)
@@ -108,6 +110,15 @@ int envoie_couleurs(int socketfd, char *pathname)
 
 int main(int argc, char **argv)
 {
+  // Choix de l'affichage du nombre de couleurs par l'utilisateur
+  int nb_couleurs; // delcaration d'un entier = au nombre de couleurs
+  char N[10]; // delcaration d'un tableau pour utiliser un fgets
+  printf("Choisissez le nombre de couleurs a afficher <= 30 : ");
+  fgets(N,20,stdin);
+  nb_couleurs=atoi(N); // Demande du nombre de couleur à afficher à l'utilisateur 
+
+  
+
   int socketfd;
 
   struct sockaddr_in server_addr;
@@ -150,7 +161,7 @@ int main(int argc, char **argv)
   {
     // envoyer et recevoir les couleurs prédominantes
     // d'une image au format BMP (argv[1])
-    envoie_couleurs(socketfd, argv[1]);
+    envoie_couleurs(socketfd, argv[1],nb_couleurs); // ajout de l'argument nb_couleurs 
   }
 
   close(socketfd);

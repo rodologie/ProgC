@@ -1,7 +1,7 @@
 CC ?= gcc
 
-COBJS ?= client.o bmp.o couleur.o
-SOBJS ?= serveur.o 
+COBJS ?= client.o bmp.o couleur.o cJSON.o
+SOBJS ?= serveur.o cJSON.o
 
 .SUFFIXES: .c .o
 
