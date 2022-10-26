@@ -12,6 +12,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <fcntl.h>
 
 #include "client.h"
 
@@ -52,7 +53,7 @@ int envoie_recois_message(int socketfd)
     return -1;
   }
 
-  printf("Message recu: %s\n", data);
+  printf("Message recu: %s\n", data );
 
   return 0;
 }
@@ -92,40 +93,50 @@ int envoie_operateur_numeros(int socketfd) {
   return 0;
 }
 
-// int envoie_operateur_numeros_etudiant( int socketfd);
-// {
-//   char data[1024];
-//   // la réinitialisation de l'ensemble des données
-//   memset(data, 0, sizeof(data));
+int envoie_operateur_numeros_etudiant( int socketfd)
+{
+  char data[1024];
+  // la réinitialisation de l'ensemble des données
+  memset(data, 0, sizeof(data));
 
-//   char message[1024];
+  char notes[1024];
+  for(int i=0; i<5; i++)
+  {
+    char nom_fichier[30] = "./etudiant/";
+    int fe, size;
+    sprintf(nom_fichier, "%d,", i);
+    printf("nom fichier : %s", nom_fichier);
+    fe = open (nom_fichier, O_RDONLY); // ouverture du fichier : fichier.txt
+    size = read(fe, notes, sizeof(notes)); 
+    strcpy(data,"calcul etudiant: ");
+    strcpy(data,"+");
+    strcat(data, notes);
+  }
   
-  
-//   strcpy(data,"calcul: ");
-//   strcat(data, message);
 
-//   int write_status = write(socketfd, data, strlen(data));
-//   if (write_status < 0)
-//   {
-//     perror("erreur ecriture");
-//     exit(EXIT_FAILURE);
-//   }
+  int write_status = write(socketfd, data, strlen(data));
+  if (write_status < 0)
+  {
+    perror("erreur ecriture");
+    exit(EXIT_FAILURE);
+  }
 
-//   // la réinitialisation de l'ensemble des données
-//   memset(data, 0, sizeof(data));
+  // la réinitialisation de l'ensemble des données
+  memset(data, 0, sizeof(data));
 
-//   // lire les données de la socket
-//   int read_status = read(socketfd, data, sizeof(data));
-//   if (read_status < 0)
-//   {
-//     perror("erreur lecture");
-//     return -1;
-//   }
+  // lire les données de la socket
+  int read_status = read(socketfd, data, sizeof(data));
+  if (read_status < 0)
+  {
+    perror("erreur lecture");
+    return -1;
+  }
 
-//   printf("Message recu: %s\n", data);
+  printf("Message recu: %s\n", data);
 
-//   return 0;
-// }
+  return 1;
+
+}
 
 int main()
 {
@@ -159,8 +170,8 @@ int main()
 
   /* Demande de l'action à realiser au client */
   char action_utilisateur[3];
-  printf("Voulez-vous envoyer un message (m), un calcul (c) ou calcul automatique (ca) ? ");
-  fgets(action_utilisateur, sizeof(action_utilisateur),stdin);
+  printf("Voulez-vous envoyer un message (m), un calcul (c) ou calcul automatique (ca) ?");
+  fgets(action_utilisateur, strlen(action_utilisateur) ,stdin);
 
   // appeler la fonction pour envoyer un message au serveur
   if (action_utilisateur[0] == 'm') {
@@ -170,7 +181,7 @@ int main()
   else if (action_utilisateur[0]=='c') {
     envoie_operateur_numeros(socketfd);
   }
-  else if (action_utilisateur[0]=='ca') {
+  else if ((action_utilisateur[0]=='a')&&(action_utilisateur[1]=='a')){ // jsp comment faire !
     envoie_operateur_numeros_etudiant(socketfd);
   }
   

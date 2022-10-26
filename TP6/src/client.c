@@ -15,7 +15,7 @@
 
 #include "client.h"
 #include "bmp.h"
-#include "cJSON.h"
+//#include "cJSON.h"
 
 /*
  * Fonction d'envoi et de réception de messages
@@ -67,7 +67,7 @@ void analyse(char *pathname, char *data, int nb_couleurs)
   int count;
   strcpy(data, "couleurs: ");
   char temp_string[30] = ""; 
-  sprintf(temp_string,"%d,",nb_couleurs); // scanf permet d'ecrire dans la chaine de caractere
+  sprintf(temp_string,"%d,",nb_couleurs); // sprintf permet d'ecrire dans la chaine de caractere
   if (cc->size <= nb_couleurs) // modification des conditions avec nb_couleurs
   {
     sprintf(temp_string, "%d,", cc->size);
