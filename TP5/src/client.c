@@ -99,28 +99,42 @@ int envoie_operateur_numeros_etudiant( int socketfd)
   // la réinitialisation de l'ensemble des données
   memset(data, 0, sizeof(data));
 
-  char notes[1024];
-  for(int i=0; i<5; i++)
+  char note1[4];
+  char note2[4];
+  for(int i=1; i<5; i++)
   {
-    char nom_fichier[30] = "./etudiant/";
-    int fe, size;
-    sprintf(nom_fichier, "%d,", i);
-    printf("nom fichier : %s", nom_fichier);
-    fe = open (nom_fichier, O_RDONLY); // ouverture du fichier : fichier.txt
-    size = read(fe, notes, sizeof(notes)); 
-    strcpy(data,"calcul etudiant: ");
-    strcpy(data,"+");
-    strcat(data, notes);
+    char nom_dossier[30];
+    int fe, size,fe2,size2;
+    sprintf(nom_dossier, "%s%d", "./etudiant/",i);
+    for (int j=1 ; j<5; j++) {
+      char nom_fichier1[20];
+      sprintf(nom_fichier1, "%s%d%s", "note",j,".txt");
+      char nom_fichier2[20];
+      sprintf(nom_fichier2, "%s%d%s", "note",j+1,".txt");
+      fe = open (nom_fichier1, O_RDONLY); // ouverture du fichier : fichier.txt note1, note2, note3, et note4
+      size = read(fe, note1, sizeof(note1)); 
+
+      fe2 = open (nom_fichier2, O_RDONLY); // ouverture du fichier : fichier.txt note2, note3, note4, et note5
+      size2 = read(fe, note2, sizeof(note2)); 
+
+      // Definition des données : "calcul etudiant: + note1 note2", "calcul etudiant: + note2 note3", "calcul etudiant: + note3 note4", "calcul etudiant: + note4 note5"
+      // /!\ il faut retirer les note en double à la fin ! => note2, note3 et note4
+      strcpy(data,"calcul etudiant: ");
+      strcpy(data,"+");
+      strcat(data, note1);
+      strcat(data, note2); 
+
+      // envoie des données
+      int write_status = write(socketfd, data, strlen(data));
+      if (write_status < 0)
+      {
+        perror("erreur ecriture");
+        exit(EXIT_FAILURE);
+      }
+      }
+    
   }
   
-
-  int write_status = write(socketfd, data, strlen(data));
-  if (write_status < 0)
-  {
-    perror("erreur ecriture");
-    exit(EXIT_FAILURE);
-  }
-
   // la réinitialisation de l'ensemble des données
   memset(data, 0, sizeof(data));
 
@@ -170,8 +184,8 @@ int main()
 
   /* Demande de l'action à realiser au client */
   char action_utilisateur[3];
-  printf("Voulez-vous envoyer un message (m), un calcul (c) ou calcul automatique (ca) ?");
-  fgets(action_utilisateur, strlen(action_utilisateur) ,stdin);
+  printf("Voulez-vous envoyer un message (m), un calcul (c) ou calcul automatique (a) ? ");
+  fgets(action_utilisateur, sizeof(action_utilisateur) ,stdin);
 
   // appeler la fonction pour envoyer un message au serveur
   if (action_utilisateur[0] == 'm') {
@@ -181,7 +195,7 @@ int main()
   else if (action_utilisateur[0]=='c') {
     envoie_operateur_numeros(socketfd);
   }
-  else if ((action_utilisateur[0]=='a')&&(action_utilisateur[1]=='a')){ // jsp comment faire !
+  else if (action_utilisateur[0]=='a'){ 
     envoie_operateur_numeros_etudiant(socketfd);
   }
   
