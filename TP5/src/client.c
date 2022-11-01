@@ -106,23 +106,32 @@ int envoie_operateur_numeros_etudiant( int socketfd)
     char nom_dossier[30];
     int fe, size,fe2,size2;
     sprintf(nom_dossier, "%s%d", "./etudiant/",i);
-    for (int j=1 ; j<5; j++) {
+    for (int j=1 ; j<5; j++)
+    {
       char nom_fichier1[20];
-      sprintf(nom_fichier1, "%s%d%s", "note",j,".txt");
+      sprintf(nom_fichier1, "%s%d%s", "./note",j,".txt");
       char nom_fichier2[20];
-      sprintf(nom_fichier2, "%s%d%s", "note",j+1,".txt");
+      sprintf(nom_fichier2, "%s%d%s", "/note",j+1,".txt");
+      
       fe = open (nom_fichier1, O_RDONLY); // ouverture du fichier : fichier.txt note1, note2, note3, et note4
       size = read(fe, note1, sizeof(note1)); 
 
       fe2 = open (nom_fichier2, O_RDONLY); // ouverture du fichier : fichier.txt note2, note3, note4, et note5
       size2 = read(fe, note2, sizeof(note2)); 
 
+      int note1i = atoi(note1);
+      int note2i = atoi(note2);
+      printf("valeur note1 : %s \n", note1);
+      printf("donnée envoyée note1i : %d \n", note1i);
+      
+
       // Definition des données : "calcul etudiant: + note1 note2", "calcul etudiant: + note2 note3", "calcul etudiant: + note3 note4", "calcul etudiant: + note4 note5"
       // /!\ il faut retirer les note en double à la fin ! => note2, note3 et note4
       strcpy(data,"calcul etudiant: ");
+      //printf("donnée %d envoyée : %s \n", j,data);
       strcpy(data,"+");
-      strcat(data, note1);
-      strcat(data, note2); 
+      strcpy(data, note1);
+      strcpy(data, note2); 
 
       // envoie des données
       int write_status = write(socketfd, data, strlen(data));
@@ -131,8 +140,11 @@ int envoie_operateur_numeros_etudiant( int socketfd)
         perror("erreur ecriture");
         exit(EXIT_FAILURE);
       }
-      }
-    
+      //printf("donnée %d envoyée : %s \n", j,data);
+
+    }
+    close(fe);
+    close(fe2);
   }
   
   // la réinitialisation de l'ensemble des données
@@ -149,7 +161,7 @@ int envoie_operateur_numeros_etudiant( int socketfd)
   printf("Message recu: %s\n", data);
 
   return 1;
-
+  
 }
 
 int main()
