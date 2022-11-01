@@ -92,59 +92,72 @@ int envoie_operateur_numeros(int socketfd) {
 
   return 0;
 }
+char concatenate_string(char* s, char* s1)
+{
+    int i;
+  
+    int j = strlen(s1);
+  
+    for (i = 0; s1[i] != '\0'; i++) {
+        s[i + j] = s1[i];
+    }
+  
+  
+    return s[i+j];
+}
 
-int envoie_operateur_numeros_etudiant( int socketfd)
+int envoie_operateur_numeros_etudiant(int socketfd)
 {
   char data[1024];
   // la réinitialisation de l'ensemble des données
   memset(data, 0, sizeof(data));
 
-  char note1[4];
-  char note2[4];
+  // char note1[100];
+  // int fe,count,size;
+  // fe = open("./etudiant/1/note1.txt", O_RDONLY); // ouverture du fichier : fichier.txt note1, note2, note3, et note4
+  // size = read(fe, note1, sizeof(note1)); 
+  // printf("size fe : %d \n", fe);
+  // printf("size of size : %d \n",size);
+  // printf("size of note : %lu \n",sizeof(note1));
+  // printf("note : %s \n",note1);
+
+  // int note1i = atoi(note1);
+  // printf("note : %d \n",note1i);
+
   for(int i=1; i<5; i++)
   {
     char nom_dossier[30];
-    int fe, size,fe2,size2;
+    
     sprintf(nom_dossier, "%s%d", "./etudiant/",i);
+
     for (int j=1 ; j<5; j++)
     {
+      int fe, size,fe2,size2;
+
+      char note1[10];
+      //char note2[10];
       char nom_fichier1[20];
-      sprintf(nom_fichier1, "%s%d%s", "./note",j,".txt");
-      char nom_fichier2[20];
-      sprintf(nom_fichier2, "%s%d%s", "/note",j+1,".txt");
+      char chemin[40];
+
+      sprintf(nom_fichier1, "%s%d%s", "/note",j,".txt");
       
-      fe = open (nom_fichier1, O_RDONLY); // ouverture du fichier : fichier.txt note1, note2, note3, et note4
-      size = read(fe, note1, sizeof(note1)); 
+      // char nom_fichier2[20];
+      // sprintf(nom_fichier2, "%s%d%s", "/note",j+1,".txt");
+      //printf("taille sprintf : %lu \n",sizeof(e));
 
-      fe2 = open (nom_fichier2, O_RDONLY); // ouverture du fichier : fichier.txt note2, note3, note4, et note5
-      size2 = read(fe, note2, sizeof(note2)); 
-
-      int note1i = atoi(note1);
-      int note2i = atoi(note2);
-      printf("valeur note1 : %s \n", note1);
-      printf("donnée envoyée note1i : %d \n", note1i);
+      strcat(chemin,nom_dossier);
+      strcat(chemin, nom_fichier1);
+      printf("nom fichier : %s \n", chemin);
+      //fe = open(nom_dossier, O_RDONLY); // ouverture du fichier : fichier.txt note1, note2, note3, et note4
+      //size = read(fe, note1, sizeof(note1)); 
+    
+      //printf("note : %s \n",note1);
       
-
-      // Definition des données : "calcul etudiant: + note1 note2", "calcul etudiant: + note2 note3", "calcul etudiant: + note3 note4", "calcul etudiant: + note4 note5"
-      // /!\ il faut retirer les note en double à la fin ! => note2, note3 et note4
-      strcpy(data,"calcul etudiant: ");
-      //printf("donnée %d envoyée : %s \n", j,data);
-      strcpy(data,"+");
-      strcpy(data, note1);
-      strcpy(data, note2); 
-
-      // envoie des données
-      int write_status = write(socketfd, data, strlen(data));
-      if (write_status < 0)
-      {
-        perror("erreur ecriture");
-        exit(EXIT_FAILURE);
-      }
-      //printf("donnée %d envoyée : %s \n", j,data);
-
+  
+      //close(fe);
+      
     }
-    close(fe);
-    close(fe2);
+    
   }
   
   // la réinitialisation de l'ensemble des données
