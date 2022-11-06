@@ -25,7 +25,7 @@ char lire_fichier(char *nom_fichier) {
     }
     close(fd);
     
-    return content,size; 
+    return size; 
 }; 
   
 char ecrire_dans_fichier(char* nom_fichier,char *message) { // Les arguments sont des pointeurs
