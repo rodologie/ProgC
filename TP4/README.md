@@ -1,7 +1,16 @@
 # Bibliothèques
-* stdio.h
 * string.h
-* 
+* stdio.h
+* stdlib.h
+* unistd.h
+* sys/types.h
+* sys/socket.h
+* netinet/in.h
+* fcntl.h
+* dirent.h
+* time.h
+* sys/stat.h
+
 
 # Références
 * Cours

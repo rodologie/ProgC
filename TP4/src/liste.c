@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include "liste.h"
 
 // cette fonction permet d'associer à la couleur en cour de traitement le pointeur de la prochaine couleur

@@ -1,6 +1,13 @@
 # Bibliothèques
-* 
-*
+* string.h 
+* stdio.h 
+* stdlib.h 
+* unistd.h 
+* sys/types.h 
+* sys/socket.h 
+* netinet/in.h 
+* fcntl.h 
+* sys/stat.h 
 
 # Références
 * David Gamble github :) https://github.com/DaveGamble/cJSON
@@ -12,5 +19,5 @@
 
 # Commentaires
 * 
-* Le dernier n'est pas fait à cause du retard des 2 autres TPs et de sa complexité. Le faire seul pendant les vacances ce n'est pas optimal.
+* Le dernier n'est pas fait à cause du retard des 2 autres TPs et de sa complexité. Le faire seul pendant les vacances ce n'est pas optimal, surtout sans gnuplot.
 
