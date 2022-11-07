@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "repertoire.h"
 #include <unistd.h>
 #include <dirent.h>
 #include <sys/types.h>
 #include <string.h>
+#include <time.h>
 
 
 int lecture_dossier(char *chemin) {
@@ -66,19 +68,7 @@ void lecture_dossier_recursif(char *chemin)
     closedir(dirp);
 }
 
-void lire_dossier_iteratif(char *chemin){
-   /*  DIR *d;
-    struct dirent *dir;
-    d = opendir(".");
-    if (d)
-    {
-        while ((dir = readdir(d)) != NULL)
-        {
-           printf("%s\n", dir->d_name);
-        }
-        closedir(d);
-        
-    } */
+void lecture_dossier_iteratif(char *chemin){
    int compteur = 1;
    DIR *dirp = opendir(chemin);
 
@@ -136,24 +126,24 @@ void lire_dossier_iteratif(char *chemin){
                ptr_liste++;
                compteur++;
                printf("\n");
-           }
-
-           printf("%s\n", ent->d_name);
-           printf("\n");
+            }
+            printf("%s\n", ent->d_name);
+            printf("\n");
        }
-
-       closedir(dirp);
-       strcpy(chemin, adresse_dir[cpt2]);
-       cpt2++;
+        sleep(2);
+        closedir(dirp);
+        strcpy(chemin, adresse_dir[cpt2]);
+        cpt2++;
    }
 }
 
-int main(int argc, char **argv){
+int main(int argc, char **argv)
+{
     if (argc < 2)
     {
         printf("Usage: readdir path\n");
         return (EXIT_FAILURE);
     }
-    lire_dossier_iteratif(argv[1]);
-     return 0;
+    lecture_dossier_iteratif(argv[1]); //  changer le nom de la fonction pour vérifier l e bon fonctionnement de chacune d'elles
+    return 0;
 }

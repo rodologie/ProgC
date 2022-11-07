@@ -8,4 +8,4 @@ int lecture_dossier(char *);
 
 void lecture_dossier_recursif(char *);
 
-void lire_dossier_iteratif(char *);
+void lecture_dossier_iteratif(char *);

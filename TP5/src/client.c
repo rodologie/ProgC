@@ -145,7 +145,7 @@ int envoie_operateur_numeros_etudiant(int socketfd)
       // sprintf(nom_fichier2, "%s%d%s", "/note",j+1,".txt");
       //printf("taille sprintf : %lu \n",sizeof(e));
 
-      strcat(chemin,nom_dossier);
+      strcpy(chemin,nom_dossier);
       strcat(chemin, nom_fichier1);
       printf("nom fichier : %s \n", chemin);
       //fe = open(nom_dossier, O_RDONLY); // ouverture du fichier : fichier.txt note1, note2, note3, et note4

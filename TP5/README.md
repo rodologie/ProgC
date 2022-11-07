@@ -44,3 +44,5 @@
       //   exit(EXIT_FAILURE);
       // }
       //printf("donnée %d envoyée : %s \n", j,data);
+
+* Diffiulté à faire en sorte que la sortie de la méthode itérative ait la même mise en forme que la commande shell 'ls -R' 
