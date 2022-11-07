@@ -4,8 +4,8 @@
 
 int main(int argc, char ** argv ){
     int res;
-    int num1 = atoi(argv[2]);
-    int num2 = atoi(argv[3]);
+    int num1 = atoi(argv[2]); // transformation char to int
+    int num2 = atoi(argv[3]); // transformation char to int
     
    switch (*argv[1]){
         case '+':  res = addition(num1,num2);  // addition

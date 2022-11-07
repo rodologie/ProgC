@@ -4,7 +4,7 @@
 #include "liste.h"
 
 // cette fonction permet d'associer à la couleur en cour de traitement le pointeur de la prochaine couleur
-void insertion(struct couleur *coul_ajout, struct liste_couleurs *precedant_ptr)
+void insertion(struct couleur *coul_ajout, struct liste_couleurs *precedant_ptr) // association du pointeur à la couleur en cours 
 {
     struct liste_couleurs *ptr = precedant_ptr;
     while ((ptr->c_suivant != NULL))
@@ -17,8 +17,8 @@ void insertion(struct couleur *coul_ajout, struct liste_couleurs *precedant_ptr)
     suivant->c_suivant = NULL;
     ptr->c_suivant = suivant;
 };
-// affichage de toutes les caractéristiques de chaques couleur de la liste_couleur
-void parcours(struct liste_couleurs *couleur)
+
+void parcours(struct liste_couleurs *couleur) // on affiche chaque couleurs de la structure
 {
     struct liste_couleurs *ptr = couleur;
     for (int i = 0; i < 10; i++)
@@ -32,7 +32,7 @@ void parcours(struct liste_couleurs *couleur)
 int main(){
     int max = 255;
 
-    // initialisation de la première couleur
+    // initialisation d'une couleur de la structure
     struct couleur C_int = {
         rand() % max,
         rand() % max,
