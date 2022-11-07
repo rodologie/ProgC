@@ -13,21 +13,20 @@ int lecture_dossier(char *chemin) {
     
     DIR *dirp = opendir(chemin);
 
-    if (dirp == NULL) {
+    if (dirp == NULL) { //vérification pad de pb de chemin
         perror("opendir");
-        // return (EXIT_FAILURE);
     }
     struct dirent * ent;
 
-    while (1)
+    while (1) // boucle infinie, on ne sort qu'une fois le break atteint
     {
-        ent = readdir(dirp);
-        if (ent == NULL){
+        ent = readdir(dirp); //pointeur 
+        if (ent == NULL){ //si fin
             break;
         }
-        printf("%s\n", ent->d_name);
+        printf("%s\n", ent->d_name); //affichage du nom 
     }
-    closedir(dirp);
+    closedir(dirp); // ferme le flux 
     return(0);
     
 }
@@ -51,17 +50,17 @@ void lecture_dossier_recursif(char *chemin)
         {
             break;
         }
-        if (ent->d_name[0] == '.')
+        if (ent->d_name[0] == '.') //on s'affranchit du . présent dans chaque fichier
         {
             continue;
         }
         printf("%s\n", ent->d_name);
-        if (ent -> d_type == DT_DIR) {
+        if (ent -> d_type == DT_DIR) { //si on est sur un repertoire
             char path[500];
             strcpy(path, chemin);
             strcat(path,"/");
-            strcat(path, ent->d_name);
-            lecture_dossier_recursif(path);
+            strcat(path, ent->d_name); //concaténation des différentes parties qui forment le chemin
+            lecture_dossier_recursif(path); // recursivité sur le chemin formé
             printf("\n");
         }
     }
@@ -115,11 +114,10 @@ void lecture_dossier_iteratif(char *chemin){
                continue;
            }
 
-           if (ent->d_type == DT_DIR)
-           { // si on est sur un dossier
+           if (ent->d_type == DT_DIR) // si on est sur un dossier
+           { 
                printf("chemin %s\n", ent->d_name);
-               // on copie l'adresse complète dans la chaîne copie
-               strcpy(copie, chemin);
+               strcpy(copie, chemin); // on copie l'adresse complète dans la chaîne copie
                strcat(copie, "/");
                strcat(copie, ent->d_name);
                strcpy(adresse_dir[ptr_liste], copie);
@@ -144,6 +142,6 @@ int main(int argc, char **argv)
         printf("Usage: readdir path\n");
         return (EXIT_FAILURE);
     }
-    lecture_dossier_iteratif(argv[1]); //  changer le nom de la fonction pour vérifier l e bon fonctionnement de chacune d'elles
+    lecture_dossier_recursif(argv[1]); //  changer le nom de la fonction pour vérifier l e bon fonctionnement de chacune d'elles
     return 0;
 }

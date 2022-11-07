@@ -29,34 +29,3 @@ void parcours(struct liste_couleurs *couleur) // on affiche chaque couleurs de l
 };
 
 
-int main(){
-    int max = 255;
-
-    // initialisation d'une couleur de la structure
-    struct couleur C_int = {
-        rand() % max,
-        rand() % max,
-        rand() % max,
-        (float)(rand() % max) / 255,
-    };
-    // création du premier maillion de la liste_couleus
-    struct liste_couleurs precedant = {
-        C_int,
-        NULL};
-
-    // ajout des autres couleurs dans la liste_couleurs
-    for (int i = 0; i < 10; i++)
-    {
-        struct couleur C_suivant = {
-            rand() % max,
-            rand() % max,
-            rand() % max,
-            (float)(rand() % max) / 256,
-        };
-        insertion(&C_suivant, &precedant);
-    };
-
-    // affichage de la liste_couleurs
-    parcours(&precedant);
-    return 0;
-}

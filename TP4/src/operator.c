@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "operator.h"
 
+//implémentation des fonctions addition soustraction, produit, quotient, modulo, ET, OU, negation
+
 int addition(int num1, int num2) {
     return num1 + num2;
 }
