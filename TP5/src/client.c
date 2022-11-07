@@ -111,26 +111,19 @@ int envoie_operateur_numeros_etudiant(int socketfd)
   char data[1024];
   // la réinitialisation de l'ensemble des données
   memset(data, 0, sizeof(data));
+ 
 
-  // char note1[100];
-  // int fe,count,size;
-  // fe = open("./etudiant/1/note1.txt", O_RDONLY); // ouverture du fichier : fichier.txt note1, note2, note3, et note4
-  // size = read(fe, note1, sizeof(note1)); 
-  // printf("size fe : %d \n", fe);
-  // printf("size of size : %d \n",size);
-  // printf("size of note : %lu \n",sizeof(note1));
-  // printf("note : %s \n",note1);
-
-  // int note1i = atoi(note1);
-  // printf("note : %d \n",note1i);
-
-  for(int i=1; i<5; i++)
+  for(int i=1; i<6; i++) // On se promène de 1 à 6 pour récupérer les 5 étudiants
   {
+    memset(data, 0, sizeof(data));
+    strcpy(data, "a: ");
+    strcpy(data, "+ ");
     char nom_dossier[30];
+    char dataF[60];
     
     sprintf(nom_dossier, "%s%d", "./etudiant/",i);
 
-    for (int j=1 ; j<5; j++)
+    for (int j=1 ; j<6; j++) // On se promène de 1 à 6 pour récupérer les 5 notes
     {
       int fe, size,fe2,size2;
 
@@ -141,22 +134,33 @@ int envoie_operateur_numeros_etudiant(int socketfd)
 
       sprintf(nom_fichier1, "%s%d%s", "/note",j,".txt");
       
-      // char nom_fichier2[20];
-      // sprintf(nom_fichier2, "%s%d%s", "/note",j+1,".txt");
-      //printf("taille sprintf : %lu \n",sizeof(e));
-
       strcpy(chemin,nom_dossier);
       strcat(chemin, nom_fichier1);
-      printf("nom fichier : %s \n", chemin);
-      //fe = open(nom_dossier, O_RDONLY); // ouverture du fichier : fichier.txt note1, note2, note3, et note4
-      //size = read(fe, note1, sizeof(note1)); 
+      //printf("nom fichier : %s \n", chemin);
+      fe = open(chemin, O_RDONLY); // ouverture du fichier : fichier.txt note1, note2, note3, et note4
+      size = read(fe, note1, sizeof(note1)); 
     
-      //printf("note : %s \n",note1);
+      strcat(data, " ");
+      strcat(data, note1); // on copie les notes au fur et à mesure dans data
       
-  
-      //close(fe);
+      if(j==2 || j== 4 ) { // on veut recuperer note1 note2 et note3 note4 pour les additionner puis additionner note5 après
+        strcpy(dataF,data); // on passe data dans dataF
+        printf("dataF : %s ", dataF);
+        memset(dataF, 0, sizeof(dataF));
       
+        int write_status = write(socketfd, dataF, strlen(data)); // on envoie dataF
+        if (write_status < 0)
+        {
+          perror("erreur ecriture");
+          exit(EXIT_FAILURE);
+        }
+    
+      }
+      close(fe);
+      // Il faudrait faire en sorte de recuperer la somme de note1+ note2 et celle de note3 + note4 pour les additionner et ajouter note5 au total.
+      // Pour faire une moyenne, il faudrait changer les operations dans serveur.C
     }
+    
     
   }
   
@@ -209,7 +213,7 @@ int main()
 
   /* Demande de l'action à realiser au client */
   char action_utilisateur[3];
-  printf("Voulez-vous envoyer un message (m), un calcul (c) ou calcul automatique (a) ? ");
+  printf("Voulez-vous envoyer un message (m), un calcul (c) ou calcul automatique (a) ! a ne fonctionne pas ! ? ");
   fgets(action_utilisateur, sizeof(action_utilisateur) ,stdin);
 
   // appeler la fonction pour envoyer un message au serveur
